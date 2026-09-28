@@ -1,0 +1,31 @@
+---
+import { site } from '../config/site';
+import { offers, formatChf } from '../config/offre';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <p class="logo" style="margin-bottom:.5rem">{site.brand}<span>.</span></p>
+      <p>Sites internet à prix fixe pour indépendants et PME de Suisse romande.</p>
+      <p class="muted">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        {site.phone && <><br /><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></>}
+      </p>
+    </div>
+    <div>
+      <h2>Offres</h2>
+      <ul>
+        {offers.map((o) => <li><a href={`/demande/?offre=${o.id}`}>{o.name} — {formatChf(o.price)} CHF</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <h2>Informations</h2>
+      <ul>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+        <li><a href="/confidentialite/">Confidentialité</a></li>
+        <li>© {year} {site.brand}</li>
+      </ul>
+    </div>
+  </div>
+</footer>

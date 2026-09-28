@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+import { steps } from '../config/offre';
+---
+<Base title="Demande reçue" description="Votre demande est bien arrivée." noindex>
+  <section class="page">
+    <div class="wrap prose">
+      <p class="kicker">Demande reçue</p>
+      <h1>Merci. On vous répond sous {site.responseTime}.</h1>
+      <p class="lede" style="margin-top:1.25rem">Prochaine étape : {steps[1].title.toLowerCase()}. {steps[1].text}</p>
+      <p>Une question d’ici là ? <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p><a href="/">Retour à l’accueil</a></p>
+    </div>
+  </section>
+</Base>

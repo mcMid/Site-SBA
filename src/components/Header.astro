@@ -1,0 +1,17 @@
+---
+import { site } from '../config/site';
+import Icon from './Icon.astro';
+const { cta = true } = Astro.props as { cta?: boolean };
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label={`${site.brand}, accueil`}>{site.brand}<span>.</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="/#offres">Offres</a>
+      <a href="/#inclus">Ce qui est inclus</a>
+      <a href="/#etapes">Étapes</a>
+      <a href="/#questions">Questions</a>
+    </nav>
+    {cta && <a class="btn btn-primary" href="/demande/">Faire une demande <Icon name="arrow" /></a>}
+  </div>
+</header>

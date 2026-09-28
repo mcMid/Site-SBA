@@ -1,0 +1,241 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Price from '../components/Price.astro';
+import { site } from '../config/site';
+import { offers, compare, payment, care, steps, faq, formatChf, minPrice } from '../config/offre';
+import { organization, website, service, faqPage } from '../lib/schema';
+
+const [essentiel, complet] = offers;
+const title = `Site internet pour PME et indépendants, Suisse romande, dès ${formatChf(minPrice)} CHF`;
+const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou ${formatChf(complet.price)} CHF. ${payment.deposit} % à la commande, le reste à la mise en ligne. En ligne en ${essentiel.delayDays} à ${complet.delayDays} jours ouvrés.`;
+---
+<Base title={title} description={description} schemas={[organization(), website(), service(), faqPage()]}>
+
+  <!-- Hero : le prix est lisible avant tout le reste -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker rise">Indépendants et PME · Suisse romande</p>
+        <h1 class="rise rise-2">Votre site internet, <span class="serif-em">à prix fixe</span>.</h1>
+        <p class="lede rise rise-3">
+          Deux offres, {formatChf(essentiel.price)} ou {formatChf(complet.price)} CHF.
+          Tout ce qui est inclus est écrit. Tout ce qui ne l’est pas aussi.
+          En ligne en {essentiel.delayDays} à {complet.delayDays} jours ouvrés.
+        </p>
+        <div class="hero-actions rise rise-3">
+          <a class="btn btn-primary" href="/demande/">Faire une demande <Icon name="arrow" /></a>
+          <a class="btn btn-ghost" href="#inclus">Voir ce qui est inclus</a>
+        </div>
+      </div>
+
+      <div class="hero-prices rise rise-3" aria-label="Les deux offres">
+        {offers.map((o) => (
+          <a href={`#offre-${o.id}`}>
+            <span class="name">{o.name}</span>
+            <Price value={o.price} />
+            <span class="meta">{o.delayDays} jours ouvrés</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="wrap">
+      <ul class="proofs">
+        <li><Icon name="check" /><span><strong>Prix affiché, prix payé.</strong> Pas de devis à attendre, pas de « nous consulter ».</span></li>
+        <li><Icon name="check" /><span><strong>{payment.deposit} % {payment.depositWhen},</strong> le reste {payment.balanceWhen}. Vous payez le solde quand le site est là.</span></li>
+        <li><Icon name="check" /><span><strong>Abonnement facultatif :</strong> {care.price} CHF par mois si vous voulez qu’on s’occupe de tout.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Offres -->
+  <section class="section" id="offres" aria-labelledby="offres-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Les offres</p>
+        <h2 id="offres-titre">Deux choix. Vous savez lequel en dix secondes.</h2>
+      </div>
+      <div class="offers">
+        {offers.map((o, i) => (
+          <article class:list={['offer', { 'is-featured': i === 1 }]} id={`offre-${o.id}`} aria-labelledby={`t-${o.id}`}>
+            <div class="offer-top">
+              <h3 class="offer-name" id={`t-${o.id}`}>{o.name}</h3>
+              {i === 1 && <span class="tag">Le plus choisi par les PME</span>}
+            </div>
+            <Price value={o.price} />
+            <p class="for">{o.forWho}</p>
+            <p style="margin:0">{o.pitch}</p>
+            <ul>
+              {o.highlights.map((h) => <li><Icon name="check" /><span>{h}</span></li>)}
+            </ul>
+            <dl class="offer-facts">
+              <dt>Délai</dt><dd>{o.delayDays} jours ouvrés</dd>
+              <dt>Corrections</dt><dd>1 tour</dd>
+              <dt>À la commande</dt><dd class="num">{formatChf(o.price * payment.deposit / 100)} CHF</dd>
+              <dt>À la mise en ligne</dt><dd class="num">{formatChf(o.price * (100 - payment.deposit) / 100)} CHF</dd>
+            </dl>
+            <a class:list={['btn', i === 1 ? 'btn-primary' : 'btn-ghost']} href={`/demande/?offre=${o.id}`}>
+              Demander l’offre {o.name} <Icon name="arrow" />
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tableau oui / non -->
+  <section class="section" id="inclus" aria-labelledby="inclus-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Ce qui est inclus</p>
+        <h2 id="inclus-titre">Oui, non. Rien entre les deux.</h2>
+        <p class="lede">Pas d’option qui apparaît sur la facture. Si une ligne dit non, elle n’est pas comprise, et on vous le dit avant de commencer.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <caption>Délai compté en jours ouvrés, à partir de la réception de vos contenus complets.</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Prestation</span></th>
+              {offers.map((o) => <th scope="col">{o.name}<span class="p num">{formatChf(o.price)} CHF</span></th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {compare.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                {[row.essentiel, row.complet].map((c) =>
+                  <td>
+                    {c === true && <span class="yes"><Icon name="check" />Oui</span>}
+                    {c === false && <span class="no"><Icon name="minus" />Non</span>}
+                    {typeof c === 'string' && <span class="txt">{c}</span>}
+                  </td>
+                )}
+              </tr>
+            ))}
+            <tr>
+              <th scope="row">Délai de mise en ligne</th>
+              {offers.map((o) => <td><span class="txt">{o.delayDays} jours</span></td>)}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paiement et abonnement -->
+  <section class="section" id="paiement" aria-labelledby="paiement-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Paiement</p>
+        <h2 id="paiement-titre">Vous payez la moitié. Le reste quand le site est en ligne.</h2>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3>Un risque limité à l’acompte</h3>
+          <div class="bar" aria-label={`${payment.deposit} % ${payment.depositWhen}, ${100 - payment.deposit} % ${payment.balanceWhen}`}>
+            <div><strong>{payment.deposit} %</strong><span>{payment.depositWhen}</span></div>
+            <div><strong>{100 - payment.deposit} %</strong><span>{payment.balanceWhen}</span></div>
+          </div>
+          <p style="margin:0">Le solde n’est dû que lorsque le site est en ligne, sur votre nom de domaine, après votre tour de corrections.</p>
+        </div>
+        <div class="panel">
+          <h3>Après la mise en ligne</h3>
+          <div class="care-price">
+            <Price value={care.price} suffix=" / mois" />
+            <span class="optional">Facultatif</span>
+          </div>
+          <ul>{care.includes.map((i) => <li>{i}</li>)}</ul>
+          <p class="muted" style="margin:0">{care.cancel} {care.without}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Étapes -->
+  <section class="section" id="etapes" aria-labelledby="etapes-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Déroulement</p>
+        <h2 id="etapes-titre">Cinq étapes. Vous voyez la fin dès le début.</h2>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3><span class="sr-only">Étape {i + 1} : </span>{s.title}</h3>
+              <p>{s.text}</p>
+              <div class="step-meta">
+                <span class="chip">{s.who === 'vous' ? 'De votre côté' : 'De notre côté'}</span>
+                {s.money && <span class="chip money">{s.money}</span>}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Corrections -->
+  <section class="section" id="corrections" aria-labelledby="corrections-titre">
+    <div class="wrap">
+      <div class="rule-box">
+        <span class="big" aria-hidden="true">1</span>
+        <div>
+          <p class="kicker">Corrections</p>
+          <h2 id="corrections-titre">Un tour de corrections. Un cadre clair, pas un chantier sans fin.</h2>
+          <div class="rule-lists">
+            <div>
+              <h3>Compris dans ce tour</h3>
+              <ul>
+                <li>Modifier ou remplacer des textes</li>
+                <li>Changer des photos</li>
+                <li>Ajuster couleurs et ordre des sections</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Pas compris</h3>
+              <ul>
+                <li>Repartir sur un autre design</li>
+                <li>Ajouter des pages hors offre</li>
+                <li>Un deuxième tour, sauf accord sur le prix avant</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="questions" aria-labelledby="faq-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Questions</p>
+        <h2 id="faq-titre">Ce qu’on nous demande avant de commencer</h2>
+      </div>
+      <div class="faq">
+        {faq.map(({ q, a }) => (
+          <details>
+            <summary>{q}</summary>
+            <p>{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Appel final -->
+  <section class="section final" aria-labelledby="final-titre">
+    <div class="wrap">
+      <h2 id="final-titre">Deux minutes pour une demande. Réponse sous {site.responseTime}.</h2>
+      <p class="lede" style="margin-top:1.25rem">Aucun engagement tant que vous n’avez pas validé l’offre par écrit.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/demande/">Faire une demande <Icon name="arrow" /></a>
+        <a class="btn btn-ghost" href={`mailto:${site.email}`}>Écrire un e-mail</a>
+      </div>
+    </div>
+  </section>
+</Base>

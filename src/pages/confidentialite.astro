@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+---
+<Base title={`Confidentialité — ${site.brand}`} description="Quelles données sont collectées par le formulaire de demande, pourquoi, combien de temps et comment les faire effacer (nLPD).">
+  <section class="page">
+    <div class="wrap prose">
+      <h1>Confidentialité</h1>
+      <p class="lede" style="margin-top:1.25rem">Ce site ne dépose aucun cookie de suivi et ne charge aucun service tiers (polices, statistiques, publicité).</p>
+      <h2>Responsable</h2>
+      <p>{site.legalName}, {site.address.postalCode} {site.address.city}. Contact : <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <h2>Données du formulaire</h2>
+      <p>Nom, entreprise, e-mail, téléphone (facultatif), localité, site actuel, délai et message. Elles servent uniquement à répondre à votre demande et à établir l’offre.</p>
+      <h2>Où elles sont stockées</h2>
+      <p>Le formulaire est traité par Netlify (États-Unis). Ce transfert est encadré par les clauses contractuelles types reconnues par le Préposé fédéral à la protection des données.</p>
+      <h2>Durée</h2>
+      <p>Supprimées 12 mois après le dernier échange si aucun contrat n’est conclu. En cas de contrat, conservées selon les obligations comptables (10 ans pour les pièces).</p>
+      <h2>Vos droits</h2>
+      <p>Accès, rectification, effacement : écrivez à <a href={`mailto:${site.email}`}>{site.email}</a>. Réponse sous 30 jours.</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { offers, payment, formatChf } from '../config/offre';
+import { breadcrumb } from '../lib/schema';
+
+const title = 'Demander votre site internet à prix fixe';
+const description = `Formulaire de demande en deux minutes. Offre ${offers.map((o) => `${o.name} ${formatChf(o.price)} CHF`).join(' ou ')}. Réponse sous ${site.responseTime}, sans engagement.`;
+---
+<Base title={title} description={description} headerCta={false}
+  schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Demande', path: '/demande/' }])]}>
+  <section class="page">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Demande</p>
+        <h1>Parlez-nous de votre entreprise.</h1>
+        <p class="lede">Deux minutes. On vous répond sous {site.responseTime} pour fixer un appel de 20 minutes. Rien n’est dû avant que vous ayez validé l’offre par écrit.</p>
+      </div>
+
+      <form class="form" name="demande" method="POST" action="/merci/" data-netlify="true" netlify-honeypot="societe_web">
+        <input type="hidden" name="form-name" value="demande" />
+        <p class="hp"><label>Ne pas remplir <input name="societe_web" tabindex="-1" autocomplete="off" /></label></p>
+
+        <fieldset class="field">
+          <legend>Quelle offre vous intéresse ?</legend>
+          <div class="choices">
+            {offers.map((o) => (
+              <div class="choice">
+                <input type="radio" name="offre" id={`offre-${o.id}`} value={o.id} />
+                <label for={`offre-${o.id}`}>{o.name}<small class="num">{formatChf(o.price)} CHF · {o.delayDays} jours</small></label>
+              </div>
+            ))}
+            <div class="choice">
+              <input type="radio" name="offre" id="offre-hesite" value="hesite" checked />
+              <label for="offre-hesite">Je ne sais pas encore<small>On vous conseille à l’appel</small></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="two">
+          <div class="field">
+            <label for="nom">Prénom et nom</label>
+            <input id="nom" name="nom" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="entreprise">Entreprise ou activité</label>
+            <input id="entreprise" name="entreprise" autocomplete="organization" required placeholder="ex. Menuiserie, cabinet de physio" />
+          </div>
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="tel">Téléphone <span class="hint">(facultatif)</span></label>
+            <input id="tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" />
+          </div>
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="localite">Localité</label>
+            <input id="localite" name="localite" autocomplete="address-level2" required />
+          </div>
+          <div class="field">
+            <label for="site-actuel">Site actuel <span class="hint">(s’il existe)</span></label>
+            <input id="site-actuel" name="site_actuel" type="url" inputmode="url" placeholder="https://" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="quand">Pour quand ?</label>
+          <select id="quand" name="quand">
+            <option>Dès que possible</option>
+            <option>Dans le mois</option>
+            <option>Dans 2 à 3 mois</option>
+            <option>Je me renseigne</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Ce que vous voulez que le site fasse <span class="hint">(facultatif)</span></label>
+          <textarea id="message" name="message" placeholder="ex. qu’on me trouve sur Google à Lausanne, prendre des rendez-vous, présenter mes réalisations"></textarea>
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" id="consentement" name="consentement" value="oui" required />
+          <label for="consentement">J’accepte que mes données servent uniquement à répondre à cette demande. Elles ne sont ni vendues ni transmises. <a href="/confidentialite/">Confidentialité</a></label>
+        </div>
+
+        <div>
+          <button class="btn btn-primary" type="submit">Envoyer ma demande <Icon name="arrow" /></button>
+        </div>
+        <p class="aside-note">Pour rappel : {payment.deposit} % {payment.depositWhen}, {100 - payment.deposit} % {payment.balanceWhen}. Aucun paiement n’est demandé à cette étape.</p>
+      </form>
+    </div>
+  </section>
+  <script is:inline defer src="/scripts/demande.js"></script>
+</Base>

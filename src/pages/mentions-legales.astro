@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+---
+<Base title={`Mentions légales — ${site.brand}`} description={`Mentions légales de ${site.brand} : éditeur, coordonnées, hébergement du site et propriété intellectuelle.`}>
+  <section class="page">
+    <div class="wrap prose">
+      <h1>Mentions légales</h1>
+      <h2>Éditeur</h2>
+      <p>{site.legalName}<br />{site.address.street}<br />{site.address.postalCode} {site.address.city}, Suisse</p>
+      {site.ide && <p>IDE : {site.ide}</p>}
+      <p>E-mail : <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <h2>Hébergement</h2>
+      <p>Netlify, Inc., 101 2nd Street, San Francisco, CA 94105, États-Unis.</p>
+      <h2>Propriété intellectuelle</h2>
+      <p>Les textes et éléments graphiques de ce site appartiennent à {site.legalName}, sauf mention contraire.</p>
+    </div>
+  </section>
+</Base>

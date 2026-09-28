@@ -1,0 +1,6 @@
+---
+import { formatChf } from '../config/offre';
+interface Props { value: number; suffix?: string }
+const { value, suffix } = Astro.props;
+---
+<span class="price"><span class="amount num">{formatChf(value)}</span><span class="cur">CHF{suffix}</span></span>
