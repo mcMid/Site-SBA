@@ -1,0 +1,19 @@
+---
+/* « Qui fait votre site » : un nom, une ville, une photo. Masqué tant que
+ * founder.name est vide. */
+import { founder } from '../config/site';
+---
+{founder.name && (
+  <section class="section" id="qui" aria-labelledby="qui-titre">
+    <div class="wrap founder">
+      {founder.photo && <img class="founder-photo" src={founder.photo} alt={`Portrait de ${founder.name}`} width="400" height="400" loading="lazy" decoding="async" />}
+      <div>
+        <p class="kicker">Qui fait votre site</p>
+        <h2 id="qui-titre">{founder.name}{founder.city && <span class="muted">, {founder.city}</span>}</h2>
+        <p class="lede" style="margin-top:1rem">{founder.role}</p>
+        {founder.bio && <p class="founder-bio">{founder.bio}</p>}
+        <p class="founder-note">Un seul interlocuteur, du premier message à la mise en ligne.</p>
+      </div>
+    </div>
+  </section>
+)}

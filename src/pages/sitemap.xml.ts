@@ -7,6 +7,7 @@ import { abs } from '../config/site';
 const pages = [
   { path: '/', lastmod: '2026-09-29' },
   { path: '/demande/', lastmod: '2026-09-29' },
+  { path: '/prix-site-internet-suisse/', lastmod: '2026-09-29' },
   { path: '/mentions-legales/', lastmod: '2026-09-29' },
   { path: '/confidentialite/', lastmod: '2026-09-29' },
 ];

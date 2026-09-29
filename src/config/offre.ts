@@ -20,21 +20,21 @@ export const offers: Offer[] = [
   {
     id: 'essentiel',
     name: 'Essentiel',
-    price: 1190,
+    price: 990,
     delayDays: 10,
     forWho: 'Indépendants, artisans, thérapeutes, consultants',
-    pitch: 'Une page claire qui dit qui vous êtes, ce que vous faites et comment vous joindre.',
+    pitch: 'Un site court et clair : qui vous êtes, ce que vous faites, comment vous joindre.',
     highlights: [
-      'Site d’une page, jusqu’à 6 sections',
+      'Jusqu’à 3 pages',
       'Vos textes mis en forme et relus',
       'Formulaire de contact',
-      'Mise en ligne sur votre nom de domaine',
+      'Hébergement offert la 1re année',
     ],
   },
   {
     id: 'complet',
     name: 'Complet',
-    price: 1990,
+    price: 1790,
     delayDays: 15,
     forWho: 'PME, commerces, cabinets, entreprises de services',
     pitch: 'Plusieurs pages pour présenter chaque service et être trouvé sur Google dans votre région.',
@@ -56,10 +56,10 @@ export interface CompareRow {
   complet: Cell;
 }
 
-// TODO(human): valider ce qui sépare Essentiel de Complet
+// Ce qui sépare les deux offres. Validé le 29.09.2026 (garantie et hébergement 1re année compris).
 export const compare: CompareRow[] = [
   { label: 'Design à vos couleurs et à votre logo', essentiel: true, complet: true },
-  { label: 'Nombre de pages', essentiel: '1 page', complet: 'jusqu’à 6' },
+  { label: 'Nombre de pages', essentiel: 'jusqu’à 3', complet: 'jusqu’à 6' },
   { label: 'Adapté au mobile', essentiel: true, complet: true },
   { label: 'Formulaire de contact', essentiel: true, complet: true },
   { label: 'Référencement de base (titres, descriptions, vitesse)', essentiel: true, complet: true },
@@ -68,6 +68,8 @@ export const compare: CompareRow[] = [
   { label: 'Une page par service ou par localité', essentiel: false, complet: true },
   { label: 'Mise en ligne et nom de domaine relié', essentiel: true, complet: true },
   { label: 'Un tour de corrections', essentiel: true, complet: true },
+  { label: 'Garantie : acompte remboursé si la maquette ne vous convient pas', essentiel: true, complet: true },
+  { label: 'Hébergement et HTTPS la 1re année', essentiel: true, complet: true },
   { label: 'Boutique en ligne', essentiel: false, complet: false },
   { label: 'Site en plusieurs langues', essentiel: false, complet: false },
   { label: 'Séance photo', essentiel: false, complet: false },
@@ -79,11 +81,18 @@ export const payment = {
   balanceWhen: 'à la mise en ligne',
 };
 
+/** Garantie : renverse le risque du premier paiement. */
+export const guarantee = {
+  short: 'Maquette qui ne vous plaît pas : on arrête, acompte remboursé.',
+  long: 'Si la maquette ne vous convient pas après votre tour de corrections, vous nous le dites : on arrête là et on vous rembourse l’acompte en entier. Vous ne payez que pour un site que vous voulez mettre en ligne.',
+};
+
 export const care = {
   price: 29, // CHF / mois
   optional: true,
+  freeFirstYear: 'L’hébergement est offert la 1re année. Ensuite, deux choix :',
   includes: [
-    'Hébergement et certificat HTTPS',
+    'Hébergement et certificat HTTPS (dès la 2e année)',
     'Mises à jour et sauvegardes',
     'Surveillance : on est prévenus avant vous si le site tombe',
     'Une petite modification de texte ou d’horaires par mois',
@@ -103,23 +112,23 @@ export interface Step {
 export const steps: Step[] = [
   {
     title: 'Vous faites une demande',
-    text: 'Deux minutes de formulaire. On vous répond sous 1 jour ouvré.',
+    text: 'Une minute de formulaire. On vous répond sous 24 h ouvrées.',
     who: 'vous',
   },
   {
-    title: 'Appel de 20 minutes',
-    text: 'On confirme l’offre, le périmètre et la date de mise en ligne. Vous recevez une confirmation écrite au prix affiché.',
-    who: 'nous',
+    title: 'Formulaire de projet',
+    text: 'On vous envoie par e-mail un formulaire de 10 minutes : vos pages, vos services, votre date souhaitée. Vous recevez ensuite une confirmation écrite au prix affiché.',
+    who: 'vous',
     money: `Acompte ${payment.deposit} %`,
   },
   {
     title: 'Vous envoyez vos contenus',
-    text: 'Logo, photos, textes ou réponses à notre questionnaire. Une liste précise vous dit quoi envoyer. Le délai démarre à ce moment.',
+    text: 'Logo, photos et textes (pour l’offre Complet, on les rédige à partir de votre formulaire de projet). Une liste précise vous dit quoi envoyer. Le délai démarre à ce moment.',
     who: 'vous',
   },
   {
     title: 'Vous validez la maquette',
-    text: 'Le site vous est présenté en ligne sur une adresse privée. Vous regroupez vos remarques en un seul tour de corrections.',
+    text: 'Le site vous est présenté en ligne sur une adresse privée. Vous regroupez vos remarques en un seul tour de corrections. Pas convaincu : acompte remboursé.',
     who: 'nous',
   },
   {
@@ -131,6 +140,10 @@ export const steps: Step[] = [
 ];
 
 export const faq: { q: string; a: string }[] = [
+  {
+    q: 'Et si le site ne me plaît pas ?',
+    a: 'Vous voyez la maquette en ligne avant de payer le solde. Si elle ne vous convient pas après votre tour de corrections, on arrête et on vous rembourse l’acompte en entier.',
+  },
   {
     q: 'Pourquoi un prix fixe, et pas un devis ?',
     a: 'Parce que le périmètre est fixe. Deux offres, un contenu défini, un tour de corrections : on sait ce que ça coûte à produire, vous savez ce que vous payez.',
@@ -152,6 +165,14 @@ export const faq: { q: string; a: string }[] = [
     a: 'On le relie et on le configure. L’enregistrement lui-même (environ 10 à 20 CHF par an pour un .ch) se fait à votre nom, chez le registraire de votre choix.',
   },
   {
+    q: 'Comment payer ?',
+    a: 'Par virement, facture QR ou TWINT. La moitié à la commande, le solde à la mise en ligne. Pas de carte de crédit demandée, pas de prélèvement automatique.',
+  },
+  {
+    q: 'Qu’est-ce que je paie après la mise en ligne ?',
+    a: 'Rien la première année : l’hébergement est offert. Ensuite, soit l’abonnement facultatif à 29 CHF par mois (hébergement, mises à jour, une modification par mois), soit un hébergement à votre nom, que l’on vous configure. Le nom de domaine (10 à 20 CHF par an pour un .ch) reste à votre charge dans les deux cas.',
+  },
+  {
     q: 'Quand le délai commence-t-il ?',
     a: 'Le jour où l’on a reçu vos contenus complets. Si vous avez tout sous la main, un site Essentiel peut être en ligne deux semaines après votre demande.',
   },
@@ -162,6 +183,6 @@ export const faq: { q: string; a: string }[] = [
 ];
 
 const chf = new Intl.NumberFormat('fr-CH', { maximumFractionDigits: 0 });
-/** 1190 → « 1 190 » avec espace insécable (Instrument n'a pas de glyphe pour l'espace fine U+202F). */
+/** 1190 → « 1 190 » avec espace insécable (certaines polices n'ont pas de glyphe pour l'espace fine U+202F). */
 export const formatChf = (n: number) => chf.format(n).replace(/[\s\u2019']/g, '\u00a0');
 export const minPrice = Math.min(...offers.map((o) => o.price));

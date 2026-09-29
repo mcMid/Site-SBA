@@ -1,0 +1,18 @@
+---
+/* Le symbole dit l'offre en un signe : une étiquette de prix (pointe, trou)
+ * qui est aussi une page de site (lignes de contenu). « Un site, un prix. »
+ * Au survol, l'étiquette se balance autour de son trou. Même dessin que
+ * public/favicon.svg. */
+import { site } from '../config/site';
+---
+<span class="brand">
+  <svg class="brand-mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true">
+    <g class="brand-tag">
+      <path fill="var(--accent)" fill-rule="evenodd" d="M1.6 16 L9 6.5 H27.5 A3 3 0 0 1 30.5 9.5 V22.5 A3 3 0 0 1 27.5 25.5 H9 Z M8.6 16 m-2.1 0 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 Z" />
+      <rect x="14" y="10.5" width="12.5" height="2" rx="1" fill="var(--on-accent)" />
+      <rect x="14" y="15" width="8" height="2" rx="1" fill="var(--on-accent)" opacity=".55" />
+      <rect x="14" y="19.5" width="10" height="2" rx="1" fill="var(--on-accent)" opacity=".55" />
+    </g>
+  </svg>
+  <span class="brand-word">{site.brand}</span>
+</span>

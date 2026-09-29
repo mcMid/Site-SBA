@@ -1,0 +1,116 @@
+---
+/* Guide de prix : la requête d'entrée du marché (« combien coûte un site
+ * internet en Suisse »). Tous les chiffres du marché sont attribués à leur
+ * source, avec la date de consultation. Nos propres prix viennent de la config. */
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, abs } from '../config/site';
+import { offers, care, payment, guarantee, formatChf } from '../config/offre';
+import { breadcrumb } from '../lib/schema';
+
+const [essentiel, complet] = offers;
+const updated = '2026-09-29';
+const title = 'Prix d’un site internet en Suisse (2026) : fourchettes et coûts';
+const description = `Combien coûte un site internet en Suisse romande en 2026 : fourchettes du marché sourcées, coûts annuels, pièges à éviter, et nos deux prix fixes (${formatChf(essentiel.price)} et ${formatChf(complet.price)} CHF).`;
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: updated,
+  dateModified: updated,
+  inLanguage: site.locale,
+  mainEntityOfPage: abs('/prix-site-internet-suisse/'),
+  author: { '@id': abs('/#organisation') },
+  publisher: { '@id': abs('/#organisation') },
+};
+---
+<Base title={title} description={description}
+  schemas={[article, breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Prix d’un site internet', path: '/prix-site-internet-suisse/' }])]}>
+  <article class="page">
+    <div class="wrap guide">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Prix d’un site internet</nav>
+      <p class="kicker">Guide · mis à jour le 29 septembre 2026</p>
+      <h1>Combien coûte un site internet en Suisse en 2026 ?</h1>
+
+      <div class="answer">
+        <p><strong>En bref :</strong> pour un site vitrine d’indépendant ou de PME en Suisse romande, les fourchettes publiées vont d’environ 500 CHF (site sur modèle) à 15 000 CHF (agence). À cela s’ajoutent environ 10 à 20 CHF par an pour un nom de domaine .ch, l’hébergement, et une maintenance facultative. Nos deux offres sont à prix fixe : <strong>{formatChf(essentiel.price)} CHF</strong> et <strong>{formatChf(complet.price)} CHF</strong>.</p>
+      </div>
+
+      <h2>Les fourchettes du marché</h2>
+      <p>Chiffres publiés par des prestataires romands, relevés le 29 septembre 2026. Ce sont des prix d’appel ou des fourchettes : le prix final dépend du périmètre.</p>
+      <div class="compare-wrap">
+        <table class="compare">
+          <caption>Sources en bas de page. Prix hors nom de domaine.</caption>
+          <thead><tr><th scope="col">Type de site</th><th scope="col">Fourchette annoncée</th><th scope="col">Source</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Site sur modèle (WordPress)</th><td class="num">500 – 3 500 CHF</td><td>Jon Labs</td></tr>
+            <tr><th scope="row">Site vitrine, freelance sur mesure</th><td class="num">1 500 – 8 000 CHF</td><td>Jon Labs</td></tr>
+            <tr><th scope="row">Site vitrine, agence</th><td class="num">5 000 – 15 000 CHF</td><td>Jon Labs</td></tr>
+            <tr><th scope="row">Site vitrine (fourchette d’une agence romande)</th><td class="num">1 200 – 8 000 CHF</td><td>Webie</td></tr>
+            <tr><th scope="row">Petite boutique en ligne</th><td class="num">1 500 – 8 000 CHF</td><td>Jon Labs</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Ce qui fait varier le prix</h2>
+      <ul>
+        <li><strong>Le nombre de pages.</strong> Une page par service aide le référencement local, mais chaque page se conçoit, se rédige et se relit.</li>
+        <li><strong>Qui écrit les textes.</strong> Mettre en forme vos textes ou les rédiger à partir d’un entretien : c’est souvent le poste le plus sous-estimé.</li>
+        <li><strong>Le design.</strong> Un modèle adapté coûte moins qu’un design dessiné pour vous.</li>
+        <li><strong>Les fonctions.</strong> Réservation, paiement, espace client, plusieurs langues : chacune ajoute du développement et des tests.</li>
+        <li><strong>Le nombre d’allers-retours.</strong> Des corrections « illimitées » se paient d’une façon ou d’une autre, dans le prix ou dans les délais.</li>
+      </ul>
+
+      <h2>Ce que vous payez après la mise en ligne</h2>
+      <ul>
+        <li><strong>Nom de domaine .ch :</strong> environ 10 à 20 CHF par an, à enregistrer à votre nom (source : Vixal Digital).</li>
+        <li><strong>Hébergement :</strong> environ 60 à 200 CHF par an selon l’hébergeur et le type de site (source : Webie).</li>
+        <li><strong>Maintenance :</strong> facultative, annoncée entre 80 et 250 CHF par mois chez une agence romande (source : Webie). Chez nous : {care.price} CHF par mois, et l’hébergement est offert la 1re année.</li>
+      </ul>
+
+      <h2>Comparer deux offres sans se faire avoir</h2>
+      <ol>
+        <li>Le prix est-il <strong>ferme</strong>, ou « à partir de » ?</li>
+        <li>Combien de <strong>pages</strong>, et qui <strong>écrit les textes</strong> ?</li>
+        <li>Combien de <strong>tours de corrections</strong>, et que coûte le suivant ?</li>
+        <li>Le <strong>nom de domaine</strong> est-il à votre nom ? Recevez-vous <strong>tous les accès</strong> ?</li>
+        <li>Que payez-vous <strong>chaque mois</strong> après la mise en ligne, et pouvez-vous résilier ?</li>
+        <li>Quand payez-vous le <strong>solde</strong> : avant ou après avoir vu le site en ligne ?</li>
+        <li>Que se passe-t-il si le résultat <strong>ne vous plaît pas</strong> ?</li>
+      </ol>
+
+      <h2>Nos prix, avec les mêmes questions</h2>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead><tr><th scope="col"><span class="sr-only">Question</span></th>{offers.map((o) => <th scope="col">{o.name}<span class="p num">{formatChf(o.price)} CHF</span></th>)}</tr></thead>
+          <tbody>
+            <tr><th scope="row">Prix ferme</th><td><span class="yes"><Icon name="check" />Oui</span></td><td><span class="yes"><Icon name="check" />Oui</span></td></tr>
+            <tr><th scope="row">Pages</th><td><span class="txt">jusqu’à 3</span></td><td><span class="txt">jusqu’à 6</span></td></tr>
+            <tr><th scope="row">Rédaction des textes</th><td><span class="no"><Icon name="minus" />Non</span></td><td><span class="yes"><Icon name="check" />Oui</span></td></tr>
+            <tr><th scope="row">Corrections</th><td><span class="txt">1 tour</span></td><td><span class="txt">1 tour</span></td></tr>
+            <tr><th scope="row">Domaine à votre nom, tous les accès</th><td><span class="yes"><Icon name="check" />Oui</span></td><td><span class="yes"><Icon name="check" />Oui</span></td></tr>
+            <tr><th scope="row">Chaque mois après</th><td colspan="2"><span class="txt">0 CHF la 1re année, puis {care.price} CHF facultatif</span></td></tr>
+            <tr><th scope="row">Solde</th><td colspan="2"><span class="txt">{100 - payment.deposit} % {payment.balanceWhen}</span></td></tr>
+            <tr><th scope="row">Si ça ne plaît pas</th><td colspan="2"><span class="txt">Acompte remboursé</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:1rem">{guarantee.long}</p>
+      <div class="hero-actions" style="margin-top:1.5rem">
+        <a class="btn btn-primary" href="/demande/">Faire une demande <Icon name="arrow" /></a>
+        <a class="btn btn-ghost" href="/#inclus">Voir tout ce qui est inclus</a>
+      </div>
+
+      <div class="sources">
+        <p><strong>Sources</strong> (consultées le 29 septembre 2026) :</p>
+        <ul>
+          <li><a href="https://www.jonlabs.ch/blog/prix-site-web-suisse-2026" rel="noopener">Jon Labs, « Combien coûte vraiment un site web en Suisse en 2026 ? »</a></li>
+          <li><a href="https://webie.ch/tarifs" rel="noopener">Webie, tarifs</a></li>
+          <li><a href="https://www.vixaldigital.com/blog/prix-site-internet-suisse-2026" rel="noopener">Vixal Digital, « Prix d’un site internet en Suisse en 2026 »</a></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</Base>

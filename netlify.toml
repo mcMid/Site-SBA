@@ -24,3 +24,17 @@
   for = "/merci/*"
   [headers.values]
     X-Robots-Tag = "noindex"
+
+# Plausible servi depuis notre domaine : la CSP reste en 'self', et les
+# bloqueurs de publicité ne faussent pas les chiffres.
+[[redirects]]
+  from = "/stats/js/script.js"
+  to = "https://plausible.io/js/script.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/stats/api/event"
+  to = "https://plausible.io/api/event"
+  status = 200
+  force = true

@@ -79,7 +79,20 @@ const inSitemap = [...sitemap.matchAll(/<loc>https?:\/\/[^/]+(\/[^<]*)<\/loc>/g)
 for (const p of inSitemap) if (!existsSync(join(DIST, p, 'index.html'))) fail('sitemap', `${p} absent du build`);
 for (const [, p] of titles) if (!inSitemap.includes(p) && p !== '/404/') fail(p, 'page indexable absente du sitemap');
 
+// Éléments de conversion encore vides (voir src/config/site.ts). Pas bloquant :
+// les blocs sont masqués tant qu'ils ne sont pas remplis.
+const cfg = readFileSync(new URL('../src/config/site.ts', import.meta.url), 'utf8');
+const missing = [
+  [/whatsapp: '',/, 'numéro WhatsApp (site.whatsapp)'],
+  [/phone: '',/, 'téléphone (site.phone)'],
+  [/founder = \{\s*name: '',/, 'nom et photo du fondateur (founder)'],
+  [/count: 0,/, 'avis Google (reviews)'],
+  [/realisations: Realisation\[\] = \[\];/, 'réalisations avec accord client (realisations)'],
+  [/plausibleDomain: '',/, 'statistiques Plausible (analytics)'],
+].filter(([re]) => re.test(cfg)).map(([, label]) => label);
+
 console.log(`${htmlFiles.length} pages contrôlées.`);
+if (missing.length) console.warn('◌ Conversion, à remplir : ' + missing.join(' · '));
 warn.forEach((w) => console.warn('⚠ ' + w));
 if (errors.length) {
   errors.forEach((e) => console.error('✗ ' + e));

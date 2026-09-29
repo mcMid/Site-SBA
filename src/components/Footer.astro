@@ -1,12 +1,13 @@
 ---
 import { site } from '../config/site';
+import Logo from './Logo.astro';
 import { offers, formatChf } from '../config/offre';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="wrap">
     <div>
-      <p class="logo" style="margin-bottom:.5rem">{site.brand}<span>.</span></p>
+      <p class="logo" style="margin-bottom:.75rem"><Logo /></p>
       <p>Sites internet à prix fixe pour indépendants et PME de Suisse romande.</p>
       <p class="muted">
         <a href={`mailto:${site.email}`}>{site.email}</a>
@@ -22,6 +23,7 @@ const year = new Date().getFullYear();
     <div>
       <h2>Informations</h2>
       <ul>
+        <li><a href="/prix-site-internet-suisse/">Prix d’un site en Suisse</a></li>
         <li><a href="/mentions-legales/">Mentions légales</a></li>
         <li><a href="/confidentialite/">Confidentialité</a></li>
         <li>© {year} {site.brand}</li>

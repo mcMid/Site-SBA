@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
-import { offers, payment, formatChf } from '../config/offre';
+import { offers, payment, guarantee, formatChf } from '../config/offre';
 import { breadcrumb } from '../lib/schema';
 
 const title = 'Demander votre site internet à prix fixe';
-const description = `Formulaire de demande en deux minutes. Offre ${offers.map((o) => `${o.name} ${formatChf(o.price)} CHF`).join(' ou ')}. Réponse sous ${site.responseTime}, sans engagement.`;
+const description = `Formulaire de demande en une minute. Offre ${offers.map((o) => `${o.name} ${formatChf(o.price)} CHF`).join(' ou ')}. Réponse sous ${site.responseTime}, sans engagement.`;
 ---
 <Base title={title} description={description} headerCta={false}
   schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Demande', path: '/demande/' }])]}>
@@ -15,7 +15,8 @@ const description = `Formulaire de demande en deux minutes. Offre ${offers.map((
       <div class="section-head">
         <p class="kicker">Demande</p>
         <h1>Parlez-nous de votre entreprise.</h1>
-        <p class="lede">Deux minutes. On vous répond sous {site.responseTime} pour fixer un appel de 20 minutes. Rien n’est dû avant que vous ayez validé l’offre par écrit.</p>
+        <p class="lede">Une minute. On vous répond sous {site.responseTime} avec un formulaire de projet de 10 minutes, sans rendez-vous téléphonique. Rien n’est dû avant que vous ayez validé l’offre par écrit.</p>
+        <p class="aside-note">{guarantee.short}</p>
       </div>
 
       <form class="form" name="demande" method="POST" action="/merci/" data-netlify="true" netlify-honeypot="societe_web">
@@ -33,7 +34,7 @@ const description = `Formulaire de demande en deux minutes. Offre ${offers.map((
             ))}
             <div class="choice">
               <input type="radio" name="offre" id="offre-hesite" value="hesite" checked />
-              <label for="offre-hesite">Je ne sais pas encore<small>On vous conseille à l’appel</small></label>
+              <label for="offre-hesite">Je ne sais pas encore<small>On vous conseille par e-mail</small></label>
             </div>
           </div>
         </fieldset>
@@ -44,46 +45,19 @@ const description = `Formulaire de demande en deux minutes. Offre ${offers.map((
             <input id="nom" name="nom" autocomplete="name" required />
           </div>
           <div class="field">
-            <label for="entreprise">Entreprise ou activité</label>
-            <input id="entreprise" name="entreprise" autocomplete="organization" required placeholder="ex. Menuiserie, cabinet de physio" />
-          </div>
-        </div>
-
-        <div class="two">
-          <div class="field">
             <label for="email">E-mail</label>
             <input id="email" name="email" type="email" autocomplete="email" required />
           </div>
-          <div class="field">
-            <label for="tel">Téléphone <span class="hint">(facultatif)</span></label>
-            <input id="tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" />
-          </div>
-        </div>
-
-        <div class="two">
-          <div class="field">
-            <label for="localite">Localité</label>
-            <input id="localite" name="localite" autocomplete="address-level2" required />
-          </div>
-          <div class="field">
-            <label for="site-actuel">Site actuel <span class="hint">(s’il existe)</span></label>
-            <input id="site-actuel" name="site_actuel" type="url" inputmode="url" placeholder="https://" />
-          </div>
         </div>
 
         <div class="field">
-          <label for="quand">Pour quand ?</label>
-          <select id="quand" name="quand">
-            <option>Dès que possible</option>
-            <option>Dans le mois</option>
-            <option>Dans 2 à 3 mois</option>
-            <option>Je me renseigne</option>
-          </select>
+          <label for="tel">Téléphone <span class="hint">(facultatif, si vous préférez un appel ou WhatsApp)</span></label>
+          <input id="tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" />
         </div>
 
         <div class="field">
-          <label for="message">Ce que vous voulez que le site fasse <span class="hint">(facultatif)</span></label>
-          <textarea id="message" name="message" placeholder="ex. qu’on me trouve sur Google à Lausanne, prendre des rendez-vous, présenter mes réalisations"></textarea>
+          <label for="message">Votre activité et ce que vous attendez du site <span class="hint">(facultatif)</span></label>
+          <textarea id="message" name="message" placeholder="ex. Menuiserie à Morges, je veux être trouvé sur Google et recevoir des demandes de devis"></textarea>
         </div>
 
         <div class="consent">

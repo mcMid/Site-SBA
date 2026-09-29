@@ -1,0 +1,29 @@
+---
+/* Vrais sites livrés, avec l'accord écrit des clients. Masqué tant que la
+ * liste est vide : on ne montre jamais de réalisation inventée. */
+import { realisations } from '../config/site';
+---
+{realisations.length > 0 && (
+  <section class="section" id="realisations" aria-labelledby="real-titre">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Réalisations</p>
+        <h2 id="real-titre">Des sites en ligne, pour de vraies entreprises.</h2>
+      </div>
+      <div class="reals">
+        {realisations.map((r) => (
+          <article class="real">
+            <a href={r.url} rel="noopener" target="_blank" class="real-img">
+              <img src={r.image} alt={`Site de ${r.name}`} width="1200" height="750" loading="lazy" decoding="async" />
+            </a>
+            <div class="real-body">
+              <h3>{r.name}</h3>
+              <p class="muted">{r.sector} · {r.city}</p>
+              {r.quote && <blockquote>« {r.quote} »{r.author && <cite>{r.author}</cite>}</blockquote>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

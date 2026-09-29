@@ -2,49 +2,59 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Price from '../components/Price.astro';
-import { site } from '../config/site';
-import { offers, compare, payment, care, steps, faq, formatChf, minPrice } from '../config/offre';
+import ScrollExpandHero from '../components/ui/ScrollExpandHero.astro';
+import Founder from '../components/Founder.astro';
+import Realisations from '../components/Realisations.astro';
+import { site, reviews } from '../config/site';
+import { offers, compare, payment, care, guarantee, steps, faq, formatChf, minPrice } from '../config/offre';
 import { organization, website, service, faqPage } from '../lib/schema';
 
 const [essentiel, complet] = offers;
 const title = `Site internet pour PME et indépendants, Suisse romande, dès ${formatChf(minPrice)} CHF`;
 const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou ${formatChf(complet.price)} CHF. ${payment.deposit} % à la commande, le reste à la mise en ligne. En ligne en ${essentiel.delayDays} à ${complet.delayDays} jours ouvrés.`;
 ---
-<Base title={title} description={description} schemas={[organization(), website(), service(), faqPage()]}>
+<Base title={title} description={description} preloadImage="/hero/site.webp" schemas={[organization(), website(), service(), faqPage()]}>
 
-  <!-- Hero : le prix est lisible avant tout le reste -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="kicker rise">Indépendants et PME · Suisse romande</p>
-        <h1 class="rise rise-2">Votre site internet, <span class="serif-em">à prix fixe</span>.</h1>
-        <p class="lede rise rise-3">
-          Deux offres, {formatChf(essentiel.price)} ou {formatChf(complet.price)} CHF.
-          Tout ce qui est inclus est écrit. Tout ce qui ne l’est pas aussi.
-          En ligne en {essentiel.delayDays} à {complet.delayDays} jours ouvrés.
-        </p>
-        <div class="hero-actions rise rise-3">
-          <a class="btn btn-primary" href="/demande/">Faire une demande <Icon name="arrow" /></a>
-          <a class="btn btn-ghost" href="#inclus">Voir ce qui est inclus</a>
-        </div>
-      </div>
-
-      <div class="hero-prices rise rise-3" aria-label="Les deux offres">
-        {offers.map((o) => (
-          <a href={`#offre-${o.id}`}>
-            <span class="name">{o.name}</span>
-            <Price value={o.price} />
-            <span class="meta">{o.delayDays} jours ouvrés</span>
-          </a>
-        ))}
-      </div>
+  <!-- Hero : une maquette de site s'ouvre au défilement jusqu'à remplir
+       l'écran. Les prix restent sous le titre au premier regard. -->
+  <ScrollExpandHero
+    mediaSrc="/hero/site.webp" mediaWidth={1600} mediaHeight={1000}
+    bgSrc="/hero/bg.webp"
+    titleLeft="Votre site," titleRight="à prix fixe."
+    ctaHref="/demande/" ctaLabel="Remplir le formulaire"
+  >
+    <p slot="top" class="kicker xh-kicker">Indépendants et PME · Suisse romande</p>
+    <div slot="bottom" class="xh-prices" aria-label="Les deux offres">
+      {offers.map((o) => (
+        <a href={`#offre-${o.id}`}>
+          <span class="name">{o.name}</span>
+          <Price value={o.price} />
+        </a>
+      ))}
     </div>
+    <a slot="bottom" class="btn btn-primary xh-start" href="/demande/">Faire une demande <Icon name="arrow" /></a>
+  </ScrollExpandHero>
 
+  <section class="intro" aria-label="En bref">
     <div class="wrap">
+      <p class="hero-lede">
+        Deux offres, {formatChf(essentiel.price)} ou {formatChf(complet.price)} CHF. Tout ce qui est inclus est écrit.
+        <em>Tout ce qui ne l’est pas aussi.</em>
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/demande/">Faire une demande <Icon name="arrow" /></a>
+        <a class="btn btn-ghost" href="#inclus">Voir ce qui est inclus</a>
+      </div>
+      {reviews.count > 0 && (
+        <a class="rating" href={reviews.url} rel="noopener" target="_blank">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <strong>{reviews.rating.toFixed(1).replace('.', ',')}/5</strong> sur Google · {reviews.count} avis
+        </a>
+      )}
       <ul class="proofs">
         <li><Icon name="check" /><span><strong>Prix affiché, prix payé.</strong> Pas de devis à attendre, pas de « nous consulter ».</span></li>
-        <li><Icon name="check" /><span><strong>{payment.deposit} % {payment.depositWhen},</strong> le reste {payment.balanceWhen}. Vous payez le solde quand le site est là.</span></li>
-        <li><Icon name="check" /><span><strong>Abonnement facultatif :</strong> {care.price} CHF par mois si vous voulez qu’on s’occupe de tout.</span></li>
+        <li><Icon name="check" /><span><strong>Garantie :</strong> {guarantee.short.charAt(0).toLowerCase() + guarantee.short.slice(1)}</span></li>
+        <li><Icon name="check" /><span><strong>Hébergement offert la 1re année.</strong> Ensuite {care.price} CHF par mois, facultatif. En ligne en {essentiel.delayDays} à {complet.delayDays} jours ouvrés.</span></li>
       </ul>
     </div>
   </section>
@@ -61,7 +71,7 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
           <article class:list={['offer', { 'is-featured': i === 1 }]} id={`offre-${o.id}`} aria-labelledby={`t-${o.id}`}>
             <div class="offer-top">
               <h3 class="offer-name" id={`t-${o.id}`}>{o.name}</h3>
-              {i === 1 && <span class="tag">Le plus choisi par les PME</span>}
+              {i === 1 && <span class="tag">Recommandé pour les PME</span>}
             </div>
             <Price value={o.price} />
             <p class="for">{o.forWho}</p>
@@ -71,7 +81,7 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
             </ul>
             <dl class="offer-facts">
               <dt>Délai</dt><dd>{o.delayDays} jours ouvrés</dd>
-              <dt>Corrections</dt><dd>1 tour</dd>
+              <dt>Corrections</dt><dd>1 tour + garantie</dd>
               <dt>À la commande</dt><dd class="num">{formatChf(o.price * payment.deposit / 100)} CHF</dd>
               <dt>À la mise en ligne</dt><dd class="num">{formatChf(o.price * (100 - payment.deposit) / 100)} CHF</dd>
             </dl>
@@ -90,7 +100,7 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
       <div class="section-head">
         <p class="kicker">Ce qui est inclus</p>
         <h2 id="inclus-titre">Oui, non. Rien entre les deux.</h2>
-        <p class="lede">Pas d’option qui apparaît sur la facture. Si une ligne dit non, elle n’est pas comprise, et on vous le dit avant de commencer.</p>
+        <p class="lede">Pas d’option qui apparaît sur la facture. Si une ligne dit non, elle n’est pas comprise, et on vous le dit avant de commencer. Pour comparer avec d’autres offres : <a href="/prix-site-internet-suisse/">combien coûte un site en Suisse en 2026</a>.</p>
       </div>
       <div class="compare-wrap">
         <table class="compare">
@@ -138,10 +148,13 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
             <div><strong>{payment.deposit} %</strong><span>{payment.depositWhen}</span></div>
             <div><strong>{100 - payment.deposit} %</strong><span>{payment.balanceWhen}</span></div>
           </div>
-          <p style="margin:0">Le solde n’est dû que lorsque le site est en ligne, sur votre nom de domaine, après votre tour de corrections.</p>
+          <p>Le solde n’est dû que lorsque le site est en ligne, sur votre nom de domaine, après votre tour de corrections.</p>
+          <p class="guarantee"><Icon name="check" /><span><strong>Garantie.</strong> {guarantee.long}</span></p>
+          <p class="muted" style="margin:0">Paiement par {site.paymentMethods.join(', ').replace(/, ([^,]*)$/, ' ou $1')}.</p>
         </div>
         <div class="panel">
           <h3>Après la mise en ligne</h3>
+          <p>{care.freeFirstYear}</p>
           <div class="care-price">
             <Price value={care.price} suffix=" / mois" />
             <span class="optional">Facultatif</span>
@@ -178,6 +191,9 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
     </div>
   </section>
 
+  <Realisations />
+  <Founder />
+
   <!-- Corrections -->
   <section class="section" id="corrections" aria-labelledby="corrections-titre">
     <div class="wrap">
@@ -186,6 +202,7 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
         <div>
           <p class="kicker">Corrections</p>
           <h2 id="corrections-titre">Un tour de corrections. Un cadre clair, pas un chantier sans fin.</h2>
+          <p class="lede" style="margin-top:1rem">Et si la maquette ne vous convient toujours pas : on arrête, acompte remboursé.</p>
           <div class="rule-lists">
             <div>
               <h3>Compris dans ce tour</h3>
@@ -230,11 +247,14 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
   <!-- Appel final -->
   <section class="section final" aria-labelledby="final-titre">
     <div class="wrap">
-      <h2 id="final-titre">Deux minutes pour une demande. Réponse sous {site.responseTime}.</h2>
-      <p class="lede" style="margin-top:1.25rem">Aucun engagement tant que vous n’avez pas validé l’offre par écrit.</p>
+      <h2 id="final-titre">Une minute pour une demande. <em>Réponse sous {site.responseTime}.</em></h2>
+      <p class="lede" style="margin-top:1.25rem">Aucun engagement tant que vous n’avez pas validé l’offre par écrit. Et si la maquette ne vous plaît pas, l’acompte vous est rendu.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/demande/">Faire une demande <Icon name="arrow" /></a>
-        <a class="btn btn-ghost" href={`mailto:${site.email}`}>Écrire un e-mail</a>
+        {site.whatsapp
+          ? <a class="btn btn-ghost" href={`https://wa.me/${site.whatsapp}`} rel="noopener" target="_blank" data-event="WhatsApp">Écrire sur WhatsApp</a>
+          : <a class="btn btn-ghost" href={`mailto:${site.email}`}>Écrire un e-mail</a>}
+        {site.phone && <a class="btn btn-ghost" href={`tel:${site.phone}`}>{site.phoneDisplay}</a>}
       </div>
     </div>
   </section>

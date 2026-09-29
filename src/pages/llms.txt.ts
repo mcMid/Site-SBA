@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { site, abs } from '../config/site';
-import { offers, payment, care, formatChf } from '../config/offre';
+import { offers, payment, care, guarantee, formatChf } from '../config/offre';
 
 export const GET: APIRoute = () => {
   const body = `# ${site.brand}
@@ -12,12 +12,14 @@ ${offers.map((o) => `- ${o.name} : ${formatChf(o.price)} CHF, en ligne en ${o.de
 
 ## Conditions
 - Paiement : ${payment.deposit} % ${payment.depositWhen}, ${100 - payment.deposit} % ${payment.balanceWhen}.
-- Un tour de corrections inclus.
+- Un tour de corrections inclus. Garantie : ${guarantee.short}
+- Hébergement offert la 1re année.
 - Abonnement facultatif : ${care.price} CHF par mois (hébergement, mises à jour, sauvegardes). ${care.cancel}
 
 ## Pages
 - [Offres, tableau de ce qui est inclus, étapes, FAQ](${abs('/')})
 - [Formulaire de demande](${abs('/demande/')})
+- [Guide : prix d’un site internet en Suisse en 2026](${abs('/prix-site-internet-suisse/')})
 `;
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

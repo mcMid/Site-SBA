@@ -3,7 +3,8 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
-import { site, abs } from '../config/site';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { site, abs, analytics } from '../config/site';
 
 interface Props {
   title: string;
@@ -11,8 +12,10 @@ interface Props {
   noindex?: boolean;
   schemas?: unknown[];
   headerCta?: boolean;
+  /** Image LCP à précharger (hero). */
+  preloadImage?: string;
 }
-const { title, description, noindex = false, schemas = [], headerCta = true } = Astro.props;
+const { title, description, noindex = false, schemas = [], headerCta = true, preloadImage } = Astro.props;
 // Canonical calculé par page, jamais hérité : l'erreur du site Tango.
 const canonical = abs(Astro.url.pathname);
 const ogImage = abs('/og.png');
@@ -26,7 +29,8 @@ const ogImage = abs('/og.png');
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
-    <meta name="theme-color" content="#f4f1ea" />
+    <meta name="theme-color" content="#0b0c0e" />
+    <script is:inline src="/scripts/theme.js"></script>
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_CH" />
     <meta property="og:site_name" content={site.brand} />
@@ -38,8 +42,13 @@ const ogImage = abs('/og.png');
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href="/fonts/instrument-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    {preloadImage && <link rel="preload" href={preloadImage} as="image" type="image/webp" fetchpriority="high" />}
+    {analytics.plausibleDomain && (
+      <script is:inline defer data-domain={analytics.plausibleDomain} data-api="/stats/api/event" src="/stats/js/script.js"></script>
+    )}
+    {analytics.plausibleDomain && <script is:inline defer src="/scripts/events.js"></script>}
     {schemas.map((d) => <JsonLd data={d} />)}
   </head>
   <body>
@@ -47,5 +56,6 @@ const ogImage = abs('/og.png');
     <Header cta={headerCta} />
     <main id="contenu"><slot /></main>
     <Footer />
+    <WhatsAppFloat />
   </body>
 </html>
