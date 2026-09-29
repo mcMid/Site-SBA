@@ -208,9 +208,12 @@ em { font-style: italic; }
 .xh-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, transparent, var(--bg) 95%), linear-gradient(color-mix(in srgb, var(--bg) 55%, transparent), color-mix(in srgb, var(--bg) 55%, transparent)); }
 .xh-stage { position: absolute; inset: 0; display: grid; place-items: center; }
 .xh-media {
-  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  /* Légèrement au-dessus du centre au départ, centré une fois ouvert. */
+  position: absolute; left: 50%; top: calc(46% + var(--p) * 4%); translate: -50% -50%;
   width: min(calc(300px + var(--p) * 1250px), 95vw);
-  height: min(calc(400px + var(--p) * 400px), 85%);
+  /* Au départ, jamais plus de la moitié de l'écran : les prix et le bouton
+     doivent tenir dessous, même sur un portable à 600 px de haut. */
+  height: min(calc(400px + var(--p) * 400px), calc(50% + var(--p) * 35%));
   border-radius: var(--radius-lg); overflow: hidden;
   box-shadow: 0 30px 80px rgb(0 0 0 / 0.45), 0 0 0 1px var(--line);
 }
@@ -247,7 +250,7 @@ em { font-style: italic; }
 .xh-hint::after { content: "↓"; display: block; margin-top: 0.15rem; animation: nudge 1.8s var(--ease) infinite; }
 @keyframes nudge { 50% { transform: translateY(4px); } }
 @media (max-width: 767px) {
-  .xh-media { width: min(calc(260px + var(--p) * 650px), 95vw); height: min(calc(360px + var(--p) * 200px), 78%); }
+  .xh-media { width: min(calc(260px + var(--p) * 650px), 95vw); }
   .xh-title .l, .xh-prices a:first-child { transform: translateX(calc(var(--p) * -180vw)); }
   .xh-title .r, .xh-prices a:last-child { transform: translateX(calc(var(--p) * 180vw)); }
 }
@@ -418,7 +421,7 @@ fieldset { border: 0; padding: 0; margin: 0; }
   .xh-prices { bottom: 7rem; }
   .xh-prices .price .amount { font-size: 2rem; }
   .xh-start { bottom: 2.5rem; }
-  .xh-media { height: min(calc(300px + var(--p) * 260px), 70%); }
+  .xh-media { height: min(calc(300px + var(--p) * 260px), calc(48% + var(--p) * 22%)); }
 }
 
 .rating { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; text-decoration: none; color: var(--text-2); }
