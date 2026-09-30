@@ -233,16 +233,17 @@ em { font-style: italic; }
 @media (max-width: 479px) { .only-lg { display: none; } .only-sm { display: inline; } }
 
 /* ---------- Hero : l'expansion ----------
-   Une maquette de site en format portrait au centre, titre coupé en
-   deux par-dessus. Au défilement, la maquette s'ouvre jusqu'à remplir
-   l'écran et les deux moitiés du titre s'écartent : « votre site » prend
-   toute la place. Une seule variable, --p (0 → 1), pilote tout ; le
-   script (public/scripts/hero.js) ne fait que la mettre à jour.
+   Un ordinateur au format de la photo (1600×1000) au centre, titre
+   coupé en deux par-dessus. Au défilement, il s'agrandit sans être
+   rogné : le cadre garde le ratio de l'image et tient dans la scène.
+   Les deux moitiés du titre s'écartent. Une seule variable, --p
+   (0 → 1), pilote tout ; le script (public/scripts/hero.js) ne fait
+   que la mettre à jour.
    --e est la progression de l'ouverture. Avec html.scrub (posé par
    theme.js avant le premier pixel), le début du geste ne fait
    qu'apparaître la maquette (opacity), puis --e suit.
    Sans JavaScript, --p reste à 0 et la page défile normalement. */
-.xh { --p: 0; --e: var(--p); position: relative; height: calc(100svh - 4rem); min-height: 34rem; overflow: hidden; isolation: isolate; }
+.xh { --p: 0; --e: var(--p); position: relative; height: calc(100svh - 6rem); overflow: hidden; isolation: isolate; }
 html.scrub .xh { --e: clamp(0, calc((var(--p) - 0.2) / 0.8), 1); }
 html.scrub .xh .xh-media { opacity: clamp(0, calc(var(--p) / 0.2), 1); }
 @media (prefers-reduced-motion: reduce) {
@@ -252,23 +253,27 @@ html.scrub .xh .xh-media { opacity: clamp(0, calc(var(--p) / 0.2), 1); }
 .xh-bg { position: absolute; inset: 0; z-index: -1; opacity: calc(1 - var(--e)); }
 .xh-bg img { width: 100%; height: 100%; object-fit: cover; }
 .xh-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(55% 60% at 50% 42%, transparent 20%, color-mix(in srgb, var(--bg) 72%, transparent) 100%); }
-.xh-stage { position: absolute; inset: 0; display: grid; place-items: center; }
+.xh-stage { position: absolute; inset: 0; display: grid; place-items: center; container-type: size; }
 .xh-media {
-  /* Légèrement au-dessus du centre au départ, centré une fois ouvert. */
+  /* Départ plus petit, centré une fois ouvert. La largeur est plafonnée
+     par la scène ET par sa hauteur (ratio 16:10 de la photo) : à la fin,
+     l'ordinateur entier — écran et pied — tient dans le cadre, sans rognage.
+     Les cqh/cqw viennent de .xh-stage. */
   position: absolute; left: 50%; top: calc(46% + var(--e) * 4%); translate: -50% -50%;
-  width: min(calc(300px + var(--e) * 1250px), 95vw);
-  height: min(calc(400px + var(--e) * 400px), calc(50% + var(--e) * 35%));
+  width: min(calc(18rem + var(--e) * 62rem), 92cqw, calc((100cqh - 2.75rem) * 1.6));
+  aspect-ratio: 1600 / 1000;
+  height: auto;
   border-radius: var(--radius-lg); overflow: hidden;
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 48px color-mix(in srgb, var(--accent) 22%, transparent), 0 30px 80px rgb(0 0 0 / 0.5);
 }
 .xh-media { container-type: size; }
-.xh-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-/* Le bouton suit l'image : même facteur d'échelle que object-fit: cover
-   (max des deux rapports), coordonnées reprises de l'image 1600×1000. */
+.xh-media img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+/* Le bouton suit l'image : même facteur d'échelle que object-fit: contain
+   (min des deux rapports), coordonnées reprises de l'image 1600×1000. */
 /* Texte de vente : mêmes coordonnées que le bouton, sur la plaque claire.
    Invisible tant que le titre de la page couvre le centre. */
 .xh-pitch {
-  --s: max(100cqw / 1600, 100cqh / 1000);
+  --s: min(100cqw / 1600, 100cqh / 1000);
   position: absolute; z-index: 1; left: 50%; translate: -50% 0;
   top: calc(var(--s) * 268); width: calc(var(--s) * 920);
   text-align: center; color: #071018; pointer-events: none;
@@ -280,7 +285,7 @@ html.scrub .xh .xh-media { opacity: clamp(0, calc(var(--p) / 0.2), 1); }
 .xh-pitch .p { font: 700 calc(var(--s) * 56) / 0.98 var(--sans); letter-spacing: -0.02em; margin-top: calc(var(--s) * 6); white-space: nowrap; }
 .xh-pitch .n { font: 500 calc(var(--s) * 20) / 1.2 var(--sans); color: #1c3d48; margin-top: calc(var(--s) * 18); }
 .xh-cta {
-  --s: max(100cqw / 1600, 100cqh / 1000);
+  --s: min(100cqw / 1600, 100cqh / 1000);
   position: absolute; z-index: 1; left: 50%; translate: -50% 0;
   top: calc(var(--s) * 560); height: calc(var(--s) * 64); padding-inline: calc(var(--s) * 40);
   display: inline-flex; align-items: center; white-space: nowrap;
@@ -299,7 +304,6 @@ html.scrub .xh .xh-media { opacity: clamp(0, calc(var(--p) / 0.2), 1); }
 :root:not([data-theme="light"]) .xh-title .l { mix-blend-mode: difference; }
 .xh-kicker { position: absolute; top: clamp(1.25rem, 4vh, 2.5rem); left: 0; right: 0; justify-content: center; z-index: 2; opacity: calc(1 - var(--e) * 2); }
 @media (max-width: 767px) {
-  .xh-media { width: min(calc(260px + var(--e) * 650px), 95vw); }
   .xh-title .l { transform: translateX(calc(var(--e) * -180vw)); }
   .xh-title .r { transform: translateX(calc(var(--e) * 180vw)); }
 }
@@ -450,10 +454,6 @@ fieldset { border: 0; padding: 0; margin: 0; }
 .site-footer h2 { font-family: var(--sans); font-size: 0.95rem; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--text); margin-bottom: 0.75rem; }
 
 /* ---------- Conversion : hero, preuves, contact direct ---------- */
-@media (max-width: 767px) {
-  .xh-media { height: min(calc(300px + var(--e) * 260px), calc(48% + var(--e) * 22%)); }
-}
-
 .rating { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; text-decoration: none; color: var(--text-2); }
 .rating .stars { color: #f5b301; letter-spacing: 0.1em; }
 .rating strong { color: var(--text); }
