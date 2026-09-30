@@ -8,19 +8,19 @@
  * jamais montré. scripts/qa.mjs liste ceux qui manquent encore.
  */
 export const site = {
-  brand: 'Studio Romand', // nom provisoire
-  url: 'https://www.example.ch', // domaine réel à renseigner avant la mise en ligne
+  brand: 'SBA system',
+  url: 'https://sbasystem.ch',
   locale: 'fr-CH',
-  email: 'A_REMPLIR@example.ch',
-  phone: '', // format E.164, ex. +41791234567 ; vide = non affiché
-  phoneDisplay: '', // ex. 079 123 45 67
-  whatsapp: '', // format E.164 sans +, ex. 41791234567 ; vide = bouton masqué
-  legalName: 'A_REMPLIR (raison sociale)',
-  ide: '', // CHE-xxx.xxx.xxx, si inscrit au registre du commerce
+  email: 'contact@sbasystem.ch',
+  phone: '', // non publié : contact sur demande, via le formulaire
+  phoneDisplay: '',
+  whatsapp: '', // vide = bouton masqué. Un lien wa.me public contient le numéro : n'importe qui peut écrire.
+  legalName: 'SBA System Sàrl',
+  ide: '', // CHE-xxx.xxx.xxx — obligatoire sur le site pour une société inscrite (art. 954a CO)
   address: {
-    street: 'A_REMPLIR',
-    postalCode: 'A_REMPLIR',
-    city: 'A_REMPLIR',
+    street: 'Rue de la Gare 11a',
+    postalCode: '1110',
+    city: 'Morges',
     country: 'CH',
   },
   areaServed: ['Vaud', 'Genève', 'Fribourg', 'Neuchâtel', 'Valais', 'Jura', 'Berne francophone'],

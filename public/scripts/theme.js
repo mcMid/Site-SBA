@@ -8,12 +8,19 @@
   try { saved = localStorage.getItem(KEY); } catch (e) {}
   if (saved === 'light') root.setAttribute('data-theme', 'light');
 
+  // La maquette du hero part invisible. Classe posée ici, avant le premier
+  // pixel : un script dans la page serait bloqué par la CSP. Pas de classe
+  // si l'animation ne jouera pas (mouvement réduit, ouverture sur une ancre).
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !location.hash) {
+    root.classList.add('scrub');
+  }
+
   function sync(btn) {
     var light = root.getAttribute('data-theme') === 'light';
     btn.setAttribute('aria-pressed', String(light));
     btn.setAttribute('aria-label', light ? 'Passer en mode sombre' : 'Passer en mode clair');
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', light ? '#f4f1ea' : '#0b0c0e');
+    if (meta) meta.setAttribute('content', light ? '#e7f3f4' : '#07090f');
   }
 
   document.addEventListener('DOMContentLoaded', function () {

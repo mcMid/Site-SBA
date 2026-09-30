@@ -5,9 +5,9 @@ import { abs } from '../config/site';
 // du contenu, à mettre à jour à la main : une date « maintenant » à chaque
 // build apprend à Google à ignorer le champ.
 const pages = [
-  { path: '/', lastmod: '2026-09-29' },
-  { path: '/demande/', lastmod: '2026-09-29' },
-  { path: '/prix-site-internet-suisse/', lastmod: '2026-09-29' },
+  { path: '/', lastmod: '2026-09-30' },
+  { path: '/demande/', lastmod: '2026-09-30' },
+  { path: '/prix-site-internet-suisse/', lastmod: '2026-09-30' },
   { path: '/mentions-legales/', lastmod: '2026-09-29' },
   { path: '/confidentialite/', lastmod: '2026-09-29' },
 ];

@@ -1,4 +1,4 @@
-# Site « Studio Romand » — sites internet à prix fixe
+# Site « SBA system » : sites internet à prix fixe
 
 Site statique Astro pour vendre des sites à des indépendants et PME de Suisse
 romande : deux offres à prix fixe, tableau oui / non, garantie, formulaire.

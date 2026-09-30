@@ -1,7 +1,6 @@
 ---
-/* Portage Astro de scroll-expansion-hero.tsx (shadcn, Next + framer-motion).
- * Même comportement, sans React : le rendu tient dans une variable CSS --p
- * (voir .xh dans global.css) et public/scripts/hero.js la fait varier.
+/* Le rendu tient dans une variable CSS --p (voir .xh dans global.css).
+ * theme.js pose html.scrub avant le premier pixel ; hero.js fait varier --p.
  * Sans JavaScript, la page reste lisible et défile normalement. */
 interface Props {
   mediaSrc: string;
@@ -12,12 +11,16 @@ interface Props {
   titleLeft: string;
   /** Seconde moitié, part vers la droite (accent, italique). */
   titleRight: string;
-  hint?: string;
   /** Vrai bouton posé sur la maquette, à l'emplacement prévu dans l'image. */
   ctaHref?: string;
   ctaLabel?: string;
+  /** Texte de vente sur la plaque, visible seulement une fois ouverte. */
+  pitchKicker?: string;
+  pitchTitle?: string;
+  pitchPrice?: string;
+  pitchNote?: string;
 }
-const { mediaSrc, mediaWidth, mediaHeight, bgSrc, titleLeft, titleRight, hint = 'Faites défiler', ctaHref, ctaLabel } = Astro.props;
+const { mediaSrc, mediaWidth, mediaHeight, bgSrc, titleLeft, titleRight, ctaHref, ctaLabel, pitchKicker, pitchTitle, pitchPrice, pitchNote } = Astro.props;
 ---
 <section class="xh" data-expand-hero aria-labelledby="xh-title">
   <div class="xh-bg" aria-hidden="true">
@@ -27,6 +30,14 @@ const { mediaSrc, mediaWidth, mediaHeight, bgSrc, titleLeft, titleRight, hint = 
   <div class="xh-stage">
     <div class="xh-media">
       <img src={mediaSrc} alt="" width={mediaWidth} height={mediaHeight} fetchpriority="high" decoding="async" />
+      {pitchTitle && (
+        <div class="xh-pitch" aria-hidden="true">
+          {pitchKicker && <p class="k">{pitchKicker}</p>}
+          <p class="t">{pitchTitle}</p>
+          {pitchPrice && <p class="p">{pitchPrice}</p>}
+          {pitchNote && <p class="n">{pitchNote}</p>}
+        </div>
+      )}
       {ctaHref && ctaLabel && <a class="xh-cta" href={ctaHref}>{ctaLabel}</a>}
     </div>
     <h1 class="xh-title" id="xh-title">
@@ -35,6 +46,5 @@ const { mediaSrc, mediaWidth, mediaHeight, bgSrc, titleLeft, titleRight, hint = 
     </h1>
   </div>
   <slot name="bottom" />
-  <p class="xh-hint" aria-hidden="true">{hint}</p>
 </section>
 <script is:inline defer src="/scripts/hero.js"></script>

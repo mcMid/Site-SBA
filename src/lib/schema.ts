@@ -8,6 +8,7 @@ export const organization = () => ({
   '@type': 'ProfessionalService',
   '@id': orgId,
   name: site.brand,
+  legalName: site.legalName,
   url: abs('/'),
   email: site.email,
   ...(site.phone && { telephone: site.phone }),
@@ -20,7 +21,7 @@ export const organization = () => ({
   },
   areaServed: site.areaServed.map((name) => ({ '@type': 'AdministrativeArea', name })),
   knowsLanguage: 'fr',
-  priceRange: `${Math.min(...offers.map((o) => o.price))}–${Math.max(...offers.map((o) => o.price))} CHF`,
+  priceRange: `${Math.min(...offers.map((o) => o.price))}-${Math.max(...offers.map((o) => o.price))} CHF`,
 });
 
 export const website = () => ({

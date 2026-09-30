@@ -1,4 +1,4 @@
-# Direction artistique — « Nuit »
+# Direction artistique : « Nuit »
 
 ## Idée
 
@@ -10,7 +10,7 @@ avant le premier geste.
 
 ## Thèmes
 
-- **Sombre par défaut.** Fond nuit `--bg #0b0c0e`, texte crème `--text #f2efe8`.
+- **Sombre par défaut.** Fond instrument `--bg #07090f`, texte froid `--text #e8f4f8`.
 - **Clair en option** : bouton soleil / lune dans l'en-tête. Le choix est mémorisé
   (`localStorage`) et posé avant le premier rendu par `public/scripts/theme.js`
   (chargé de façon bloquante dans `<head>`), donc pas de flash de thème.
@@ -21,28 +21,27 @@ avant le premier geste.
 
 | Jeton | Sombre | Clair | Rôle |
 |---|---|---|---|
-| `--bg` | `#0b0c0e` | `#f4f1ea` | Fond de page |
-| `--surface` | `#15161a` | `#fffdf8` | Cartes, tableaux, panneaux |
-| `--surface-2` | `#1d1f23` | `#ebe6db` | Offre mise en avant, appel final |
-| `--text` / `--text-2` / `--muted` | crème → gris | encre → gris | Hiérarchie du texte |
-| `--accent` | `#5aa2ff` | `#1f4fd1` | Prix, mot-clé, action principale |
-| `--on-accent` | nuit | blanc | Texte sur bouton accent |
+| `--bg` | `#07090f` | `#e7f3f4` | Fond de page |
+| `--surface` | `#101722` | `#f7fbfb` | Cartes, tableaux, panneaux |
+| `--surface-2` | `#162033` | `#dceff2` | Offre mise en avant, appel final |
+| `--text` / `--text-2` / `--muted` | glace → gris bleu | encre → gris | Hiérarchie du texte |
+| `--accent` | `#5cefff` | `#0a6d86` | Prix, repères, signal |
+| `--on-accent` | nuit | blanc | Texte sur l'accent |
 
 Contrastes vérifiés (texte courant ≥ 4,5:1) et notés à côté de chaque jeton.
 
 ## Couleur
 
-- **Un seul accent** : le bleu. Ciel en sombre, cobalt en clair, même teinte.
-  Aucun orange nulle part, maquettes comprises.
-- Réservé au prix, à la seconde moitié du titre, aux fins de phrase qui concluent
-  (*Tout ce qui ne l'est pas aussi.*) et au bouton principal.
-- Les couleurs vives viennent des maquettes de sites, jamais de l'interface.
+- **Cyan = signal.** Prix, seconde moitié du titre, repères. Aucun orange.
+- **Vert = agir.** Seuls les boutons d'action. Le cyan n'est pas un bouton.
+- Les visuels du hero sont des plans techniques (radar, cadre, signal), pas des photos de métiers.
 
 ## Typographie
 
-- **Bricolage Grotesque** (graisse 650–700, interlettrage serré) : titres, prix, chiffres.
+- **Arimo** (graisse 700 pour titres, boutons et prix, 400 pour le texte).
+  Même famille que le mot-symbole : grotesque proche d'Helvetica Bold.
   L'accent passe par la couleur, jamais par l'italique.
-- **Figtree** : texte, boutons, libellés.
+- Boutons rectangulaires (rayon 2 px), sans flèche. Le vert reste l'action.
 - Dans les images générées (OG, maquettes), Helvetica Neue gras tient le rôle du titre.
 - Auto-hébergées, avec des polices de secours ajustées aux mêmes dimensions (aucun
   décalage au chargement).
@@ -64,7 +63,7 @@ Contrastes vérifiés (texte courant ≥ 4,5:1) et notés à côté de chaque je
 
 ## Visuels
 
-- `node scripts/cards.mjs` : 10 maquettes de métiers (fond mosaïque).
+- `node scripts/cards.mjs` : 10 plans techniques, rendu instrument (fond mosaïque).
 - `node scripts/hero-media.mjs` : maquette principale (1600×1000) et mur de fond.
 - `node scripts/og.mjs` : image de partage (sombre).
 - Toutes décoratives et sans nom d'entreprise : ce **ne sont pas** des réalisations.
@@ -80,7 +79,7 @@ Contrastes vérifiés (texte courant ≥ 4,5:1) et notés à côté de chaque je
 
 ## Conversion
 
-- **Vert = agir.** Seuls les boutons d'action sont verts (`--cta`) ; le bleu
+- **Vert = agir.** Seuls les boutons d'action sont verts (`--cta`) ; le cyan
   informe (prix, accents, logo). Un seul élément vert par écran visible.
 - **Logo :** une étiquette de prix qui est aussi une page de site. Au survol,
   elle se balance autour de son trou.

@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#5aa2ff" fill-rule="evenodd" d="M1.6 16 L9 6.5 H27.5 A3 3 0 0 1 30.5 9.5 V22.5 A3 3 0 0 1 27.5 25.5 H9 Z M8.6 16 m-2.1 0 a2.1 2.1 0 1 0 4.2 0 a2.1 2.1 0 1 0 -4.2 0 Z"/><rect x="14" y="10.5" width="12.5" height="2" rx="1" fill="#0b0c0e"/><rect x="14" y="15" width="8" height="2" rx="1" fill="#0b0c0e" opacity=".55"/><rect x="14" y="19.5" width="10" height="2" rx="1" fill="#0b0c0e" opacity=".55"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 -4 73 73">
+  <style>
+    path { stroke: #211d5c; fill: none; }
+    circle { fill: #211d5c; }
+    @media (prefers-color-scheme: dark) {
+      path { stroke: #e8f4f8; }
+      circle { fill: #e8f4f8; }
+    }
+  </style>
+  <path stroke-width="3.5" d="M20 16.8 V12.5 A10 10 0 0 1 30 2.5 H64 A10 10 0 0 1 74 12.5 V51.5 A10 10 0 0 1 64 61.5 H30 A10 10 0 0 1 20 51.5 V47.2"/>
+  <circle cx="11.5" cy="32" r="4.7"/>
+</svg>

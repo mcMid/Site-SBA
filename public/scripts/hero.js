@@ -1,7 +1,9 @@
 // Hero à expansion. Tant que la maquette n'est pas ouverte, la molette, le
 // doigt et le clavier font avancer --p (0 → 1) au lieu de faire défiler la
-// page. Une fois ouverte, la page défile normalement ; remonter tout en haut
-// referme la maquette. Tout le rendu est en CSS (voir .xh dans global.css).
+// page. Le début de --p ne fait qu'apparaître la maquette ; l'ouverture
+// suit (voir --e dans global.css). Une fois ouverte, la page défile
+// normalement ; remonter tout en haut referme la maquette. Tout le rendu
+// est en CSS (voir .xh dans global.css).
 //
 // On ne verrouille jamais le défilement quand :
 //   - le visiteur préfère réduire les animations ;
@@ -18,6 +20,8 @@
   function set(v) {
     p = Math.min(Math.max(v, 0), 1);
     hero.style.setProperty('--p', p.toFixed(4));
+    // Le bouton sur la maquette n'est cliquable qu'une fois visible.
+    hero.classList.toggle('is-open', p >= 0.55);
     if (p >= 1) open = true;
   }
   function openNow() { set(1); open = true; }

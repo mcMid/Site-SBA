@@ -8,7 +8,7 @@ import { realisations } from '../config/site';
     <div class="wrap">
       <div class="section-head">
         <p class="kicker">Réalisations</p>
-        <h2 id="real-titre">Des sites en ligne, pour de vraies entreprises.</h2>
+        <h2 id="real-titre">Sites déjà en ligne.</h2>
       </div>
       <div class="reals">
         {realisations.map((r) => (
@@ -18,7 +18,7 @@ import { realisations } from '../config/site';
             </a>
             <div class="real-body">
               <h3>{r.name}</h3>
-              <p class="muted">{r.sector} · {r.city}</p>
+              <p class="muted">{r.sector}, {r.city}</p>
               {r.quote && <blockquote>« {r.quote} »{r.author && <cite>{r.author}</cite>}</blockquote>}
             </div>
           </article>

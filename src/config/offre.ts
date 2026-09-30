@@ -11,6 +11,7 @@ export interface Offer {
   name: string;
   price: number; // CHF, prix fixe
   delayDays: number; // jours ouvrés après réception des contenus
+  revisionRounds: number; // tours de corrections compris
   forWho: string;
   pitch: string;
   highlights: string[];
@@ -22,11 +23,12 @@ export const offers: Offer[] = [
     name: 'Essentiel',
     price: 990,
     delayDays: 10,
+    revisionRounds: 1,
     forWho: 'Indépendants, artisans, thérapeutes, consultants',
     pitch: 'Un site court et clair : qui vous êtes, ce que vous faites, comment vous joindre.',
     highlights: [
       'Jusqu’à 3 pages',
-      'Vos textes mis en forme et relus',
+      'Vos textes mis en page',
       'Formulaire de contact',
       'Hébergement offert la 1re année',
     ],
@@ -36,11 +38,13 @@ export const offers: Offer[] = [
     name: 'Complet',
     price: 1790,
     delayDays: 15,
+    revisionRounds: 3,
     forWho: 'PME, commerces, cabinets, entreprises de services',
     pitch: 'Plusieurs pages pour présenter chaque service et être trouvé sur Google dans votre région.',
     highlights: [
       'Jusqu’à 6 pages',
-      'Textes rédigés par nous à partir d’un entretien',
+      '3 tours de corrections',
+      'Textes rédigés par nous à partir du formulaire de projet',
       'Fiche Google Business Profile configurée',
       'Une page par service pour le référencement local',
     ],
@@ -65,9 +69,9 @@ export const compare: CompareRow[] = [
   { label: 'Référencement de base (titres, descriptions, vitesse)', essentiel: true, complet: true },
   { label: 'Rédaction des textes', essentiel: false, complet: true },
   { label: 'Fiche Google Business Profile', essentiel: false, complet: true },
-  { label: 'Une page par service ou par localité', essentiel: false, complet: true },
+  { label: 'Une page par service', essentiel: false, complet: true },
   { label: 'Mise en ligne et nom de domaine relié', essentiel: true, complet: true },
-  { label: 'Un tour de corrections', essentiel: true, complet: true },
+  { label: 'Tours de corrections', essentiel: '1 tour', complet: '3 tours' },
   { label: 'Garantie : acompte remboursé si la maquette ne vous convient pas', essentiel: true, complet: true },
   { label: 'Hébergement et HTTPS la 1re année', essentiel: true, complet: true },
   { label: 'Boutique en ligne', essentiel: false, complet: false },
@@ -83,8 +87,8 @@ export const payment = {
 
 /** Garantie : renverse le risque du premier paiement. */
 export const guarantee = {
-  short: 'Maquette qui ne vous plaît pas : on arrête, acompte remboursé.',
-  long: 'Si la maquette ne vous convient pas après votre tour de corrections, vous nous le dites : on arrête là et on vous rembourse l’acompte en entier. Vous ne payez que pour un site que vous voulez mettre en ligne.',
+  short: 'Après les corrections comprises, si la maquette ne vous convient pas : on arrête, acompte remboursé.',
+  long: 'Si la maquette ne vous convient pas après les corrections comprises dans votre offre, vous nous le dites : on arrête là et on vous rembourse l’acompte en entier. Vous ne payez que pour un site que vous voulez mettre en ligne.',
 };
 
 export const care = {
@@ -117,7 +121,7 @@ export const steps: Step[] = [
   },
   {
     title: 'Formulaire de projet',
-    text: 'On vous envoie par e-mail un formulaire de 10 minutes : vos pages, vos services, votre date souhaitée. Vous recevez ensuite une confirmation écrite au prix affiché.',
+    text: 'On vous envoie par e-mail un formulaire de 10 minutes : vos pages, vos services, votre date souhaitée. Vous recevez ensuite une confirmation écrite au prix affiché. L’acompte est dû quand vous l’acceptez.',
     who: 'vous',
     money: `Acompte ${payment.deposit} %`,
   },
@@ -128,8 +132,8 @@ export const steps: Step[] = [
   },
   {
     title: 'Vous validez la maquette',
-    text: 'Le site vous est présenté en ligne sur une adresse privée. Vous regroupez vos remarques en un seul tour de corrections. Pas convaincu : acompte remboursé.',
-    who: 'nous',
+    text: 'Le site vous est présenté en ligne sur une adresse privée. Vous regroupez vos remarques : un tour pour l’offre Essentiel, trois pour l’offre Complet. Après ces tours, si la maquette ne vous convient pas : acompte remboursé.',
+    who: 'vous',
   },
   {
     title: 'Mise en ligne',
@@ -142,15 +146,15 @@ export const steps: Step[] = [
 export const faq: { q: string; a: string }[] = [
   {
     q: 'Et si le site ne me plaît pas ?',
-    a: 'Vous voyez la maquette en ligne avant de payer le solde. Si elle ne vous convient pas après votre tour de corrections, on arrête et on vous rembourse l’acompte en entier.',
+    a: 'Vous voyez la maquette en ligne avant de payer le solde. Si elle ne vous convient pas après les corrections comprises dans votre offre, on arrête et on vous rembourse l’acompte en entier.',
   },
   {
     q: 'Pourquoi un prix fixe, et pas un devis ?',
-    a: 'Parce que le périmètre est fixe. Deux offres, un contenu défini, un tour de corrections : on sait ce que ça coûte à produire, vous savez ce que vous payez.',
+    a: 'Parce que le périmètre est fixe. Deux offres, un contenu défini, un nombre de tours de corrections écrit d’avance : on sait ce que ça coûte à produire, vous savez ce que vous payez.',
   },
   {
-    q: 'Que comprend exactement « un tour de corrections » ?',
-    a: 'Vous regroupez toutes vos remarques sur la maquette en une seule liste, on les applique en une fois. Changer un texte, une photo, une couleur, l’ordre des sections : c’est compris. Refaire le site dans une autre direction ne l’est pas.',
+    q: 'Que comprend un tour de corrections ?',
+    a: 'Vous regroupez toutes vos remarques sur la maquette, on les applique en une fois. L’offre Essentiel comprend un tour, l’offre Complet en comprend trois. Changer un texte, une photo, une couleur, l’ordre des sections : c’est compris. Refaire le site dans une autre direction ne l’est pas.',
   },
   {
     q: 'Et si j’ai besoin de plus de corrections ?',
@@ -174,11 +178,11 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: 'Quand le délai commence-t-il ?',
-    a: 'Le jour où l’on a reçu vos contenus complets. Si vous avez tout sous la main, un site Essentiel peut être en ligne deux semaines après votre demande.',
+    a: `Le jour où l’on a reçu vos contenus complets : ${offers[0].delayDays} jours ouvrés pour l’Essentiel, ${offers[1].delayDays} pour le Complet. Le formulaire et l’envoi des contenus viennent avant ce décompte.`,
   },
   {
     q: 'Travaillez-vous hors de Suisse romande ?',
-    a: 'Le site est en français et nos rendez-vous se font en français. Votre entreprise peut être n’importe où, tant que ce cadre vous convient.',
+    a: 'Les échanges se font en français, par e-mail. On travaille depuis la Suisse romande. Votre entreprise peut être ailleurs, si ce cadre vous convient.',
   },
 ];
 

@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 import { offers, payment, guarantee, formatChf } from '../config/offre';
 import { breadcrumb } from '../lib/schema';
@@ -12,16 +11,16 @@ const description = `Formulaire de demande en une minute. Offre ${offers.map((o)
   schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Demande', path: '/demande/' }])]}>
   <section class="page">
     <div class="wrap">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Demande</nav>
       <div class="section-head">
-        <p class="kicker">Demande</p>
-        <h1>Parlez-nous de votre entreprise.</h1>
+        <h1>Votre activité, et l’offre.</h1>
         <p class="lede">Une minute. On vous répond sous {site.responseTime} avec un formulaire de projet de 10 minutes, sans rendez-vous téléphonique. Rien n’est dû avant que vous ayez validé l’offre par écrit.</p>
         <p class="aside-note">{guarantee.short}</p>
       </div>
 
       <form class="form" name="demande" method="POST" action="/merci/" data-netlify="true" netlify-honeypot="societe_web">
         <input type="hidden" name="form-name" value="demande" />
-        <p class="hp"><label>Ne pas remplir <input name="societe_web" tabindex="-1" autocomplete="off" /></label></p>
+        <p class="hp" aria-hidden="true"><label>Ne pas remplir <input name="societe_web" tabindex="-1" autocomplete="off" /></label></p>
 
         <fieldset class="field">
           <legend>Quelle offre vous intéresse ?</legend>
@@ -29,7 +28,7 @@ const description = `Formulaire de demande en une minute. Offre ${offers.map((o)
             {offers.map((o) => (
               <div class="choice">
                 <input type="radio" name="offre" id={`offre-${o.id}`} value={o.id} />
-                <label for={`offre-${o.id}`}>{o.name}<small class="num">{formatChf(o.price)} CHF · {o.delayDays} jours</small></label>
+                <label for={`offre-${o.id}`}>{o.name}<small class="num">{formatChf(o.price)} CHF, {o.delayDays} jours ouvrés</small></label>
               </div>
             ))}
             <div class="choice">
@@ -66,7 +65,7 @@ const description = `Formulaire de demande en une minute. Offre ${offers.map((o)
         </div>
 
         <div>
-          <button class="btn btn-primary" type="submit">Envoyer ma demande <Icon name="arrow" /></button>
+          <button class="btn btn-primary" type="submit">Envoyer</button>
         </div>
         <p class="aside-note">Pour rappel : {payment.deposit} % {payment.depositWhen}, {100 - payment.deposit} % {payment.balanceWhen}. Aucun paiement n’est demandé à cette étape.</p>
       </form>

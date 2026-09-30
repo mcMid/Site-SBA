@@ -12,7 +12,7 @@ ${offers.map((o) => `- ${o.name} : ${formatChf(o.price)} CHF, en ligne en ${o.de
 
 ## Conditions
 - Paiement : ${payment.deposit} % ${payment.depositWhen}, ${100 - payment.deposit} % ${payment.balanceWhen}.
-- Un tour de corrections inclus. Garantie : ${guarantee.short}
+- Corrections comprises : ${offers.map((o) => `${o.name}, ${o.revisionRounds} tour${o.revisionRounds > 1 ? 's' : ''}`).join(' ; ')}. Garantie : ${guarantee.short}
 - Hébergement offert la 1re année.
 - Abonnement facultatif : ${care.price} CHF par mois (hébergement, mises à jour, sauvegardes). ${care.cancel}
 
