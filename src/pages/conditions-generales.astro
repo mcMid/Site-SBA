@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+import { offers, payment, care, guarantee, formatChf } from '../config/offre';
+import { breadcrumb } from '../lib/schema';
+
+const title = 'Conditions générales de SBA system pour un site à prix fixe';
+const description = 'Commande, acompte, délai, corrections, remboursement de la maquette, domaine, hébergement et abonnement. Les prix affichés sur le site sont les prix facturés.';
+---
+<Base title={title} description={description}
+  schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Conditions générales', path: '/conditions-generales/' }])]}>
+  <section class="page">
+    <div class="wrap prose">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Conditions générales</nav>
+      <h1>Conditions générales</h1>
+      <p class="lede" style="margin-top:1.25rem">Ces conditions reprennent l’offre publiée sur ce site. La confirmation écrite envoyée avant l’acompte fige le prix et le périmètre.</p>
+
+      <h2>Qui</h2>
+      <p>{site.legalName}, {site.address.street}, {site.address.postalCode} {site.address.city}, Suisse. Contact : <a href={`mailto:${site.email}`}>{site.email}</a>.{site.ide && ` IDE : ${site.ide}.`}</p>
+
+      <h2>L’offre</h2>
+      <p>Deux formules à prix fixe : {offers.map((o) => `${o.name}, ${formatChf(o.price)} CHF, ${o.delayDays} jours ouvrés, ${o.revisionRounds} tour${o.revisionRounds > 1 ? 's' : ''} de corrections`).join(' ; ')}. Le détail de chaque ligne est le tableau de la page d’accueil. Une ligne marquée non n’est pas comprise.</p>
+
+      <h2>Commande et paiement</h2>
+      <p>La demande en ligne n’engage pas. Après le formulaire de projet, une confirmation écrite reprend le prix affiché. L’acompte de {payment.deposit} % est dû quand cette confirmation est acceptée. Le solde de {100 - payment.deposit} % est dû à la mise en ligne, sur le nom de domaine, après les corrections comprises. Paiement par {site.paymentMethods.join(', ').replace(/, ([^,]*)$/, ' ou $1')}. Aucun prélèvement automatique.</p>
+
+      <h2>Délai</h2>
+      <p>Le délai court le jour où les contenus demandés sont complets. Il est de {offers.map((o) => `${o.delayDays} jours ouvrés pour l’offre ${o.name}`).join(', ')}.</p>
+
+      <h2>Corrections</h2>
+      <p>Un tour, c’est l’ensemble des remarques regroupées, appliquées en une fois. Changer un texte, une photo, une couleur ou l’ordre des sections est compris. Repartir sur un autre design, ou ajouter des pages hors offre, ne l’est pas. Un tour supplémentaire est annoncé par écrit avant d’être fait. Rien n’est facturé sans accord écrit.</p>
+
+      <h2>Garantie</h2>
+      <p>{guarantee.long}</p>
+
+      <h2>Domaine et propriété</h2>
+      <p>Le nom de domaine est enregistré au nom du client, chez le registraire de son choix. L’enregistrement (environ 10 à 20 CHF par an pour un .ch) reste à sa charge. On le relie et on le configure. À la mise en ligne, le client reçoit les accès. Le site lui appartient, avec ou sans abonnement.</p>
+
+      <h2>Après la mise en ligne</h2>
+      <p>L’hébergement est offert la première année. Ensuite, deux choix. L’abonnement facultatif à {care.price} CHF par mois, {care.cancel.toLowerCase()}</p>
+      <ul>{care.includes.map((item) => <li>{item}</li>)}</ul>
+      <p>{care.without}</p>
+
+      <h2>Droit applicable</h2>
+      <p>Le droit suisse s’applique. Une question sur une commande : <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>

@@ -10,8 +10,8 @@ import { offers, compare, payment, care, guarantee, steps, faq, formatChf, minPr
 import { organization, website, service, faqPage } from '../lib/schema';
 
 const [essentiel, complet] = offers;
-const title = `Site internet pour PME et indépendants, Suisse romande, dès ${formatChf(minPrice)} CHF`;
-const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou ${formatChf(complet.price)} CHF. ${payment.deposit} % à la commande, le reste à la mise en ligne. En ligne en ${essentiel.delayDays} à ${complet.delayDays} jours ouvrés.`;
+const title = `Site à prix fixe pour PME, Suisse romande, dès ${formatChf(minPrice)} CHF`;
+const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatChf(complet.price)} CHF, pour indépendants et PME en Suisse romande. ${payment.deposit} % à la commande, le solde à la mise en ligne. Délai : ${essentiel.delayDays} à ${complet.delayDays} jours ouvrés.`;
 ---
 <Base title={title} description={description} preloadImage="/hero/site.webp?v=ecran" schemas={[organization(), website(), service(), faqPage()]}>
 
@@ -28,6 +28,11 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
     ctaHref="/demande/?offre=essentiel" ctaLabel="Écrire pour ce prix"
   >
     <p slot="top" class="kicker xh-kicker">Indépendants et PME, Suisse romande</p>
+    <div slot="bottom" class="xh-offers">
+      {offers.map((o) => (
+        <a href={`/demande/?offre=${o.id}`}>{o.name} <strong class="num">{formatChf(o.price)} CHF</strong></a>
+      ))}
+    </div>
   </ScrollExpandHero>
 
   <section class="intro" aria-label="En bref">
@@ -36,7 +41,6 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
         Deux offres, {formatChf(essentiel.price)} ou {formatChf(complet.price)} CHF. Le tableau plus bas dit ce qui est compris, et ce qui ne l’est pas.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="/demande/">Envoyer une demande</a>
         <a class="text-link" href="#inclus">Le détail, ligne par ligne</a>
       </div>
       {reviews.count > 0 && (
@@ -234,14 +238,24 @@ const description = `Deux offres à prix fixe : ${formatChf(essentiel.price)} ou
   <!-- Appel final -->
   <section class="section final" aria-labelledby="final-titre">
     <div class="wrap">
-      <h2 id="final-titre">Une demande prend une minute. On répond sous {site.responseTime}.</h2>
-      <p class="lede" style="margin-top:1.25rem">Aucun engagement tant que vous n’avez pas validé l’offre par écrit. {guarantee.short}</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/demande/">Envoyer une demande</a>
-        {site.whatsapp
-          ? <a class="btn btn-ghost" href={`https://wa.me/${site.whatsapp}`} rel="noopener" target="_blank" data-event="WhatsApp">Écrire sur WhatsApp</a>
-          : <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>}
-        {site.phone && <a class="btn btn-ghost" href={`tel:${site.phone}`}>{site.phoneDisplay}</a>}
+      <h2 class="final-head" id="final-titre">
+        <span class="final-l1">Une demande prend </span>
+        <span class="final-l2">une minute. </span>
+        <span class="final-k">On répond sous </span>
+        <span class="final-n">{site.responseTime}</span>
+      </h2>
+      <div class="final-bar">
+        <div class="final-terms">
+          <p>Aucun engagement tant que vous n’avez pas validé l’offre par écrit.</p>
+          <p>{guarantee.short}</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/demande/">Envoyer une demande</a>
+          {site.whatsapp
+            ? <a class="btn btn-ghost" href={`https://wa.me/${site.whatsapp}`} rel="noopener" target="_blank" data-event="WhatsApp">Écrire sur WhatsApp</a>
+            : <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>}
+          {site.phone && <a class="btn btn-ghost" href={`tel:${site.phone}`}>{site.phoneDisplay}</a>}
+        </div>
       </div>
     </div>
   </section>

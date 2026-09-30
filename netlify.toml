@@ -27,6 +27,13 @@
 
 # Plausible servi depuis notre domaine : la CSP reste en 'self', et les
 # bloqueurs de publicité ne faussent pas les chiffres.
+# Une seule adresse canonique. Le domaine www doit aussi être branché sur le site Netlify.
+[[redirects]]
+  from = "https://www.sbasystem.ch/*"
+  to = "https://sbasystem.ch/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/stats/js/script.js"
   to = "https://plausible.io/js/script.js"

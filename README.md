@@ -26,6 +26,15 @@ node scripts/cards.mjs && node scripts/hero-media.mjs && node scripts/og.mjs
 | `src/styles/global.css` | Design : couleurs par thème (sombre / clair), typographies, composants. |
 | `DA.md` | Direction artistique et règles à respecter. |
 
+## Mots-clés et pages
+
+| Page | Requête principale | Intention |
+|---|---|---|
+| `/` | site internet prix fixe Suisse romande | Commerciale |
+| `/prix-site-internet-suisse/` | prix d’un site internet en Suisse | Informationnelle |
+| `/demande/` | demander un site à prix fixe | Transactionnelle |
+| `/a-propos/` | SBA system Morges | Navigationnelle |
+
 ## Avant la mise en ligne
 
 1. Remplacer tous les `A_REMPLIR` de `src/config/site.ts` (le build de

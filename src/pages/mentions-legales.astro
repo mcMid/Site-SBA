@@ -1,10 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../config/site';
+import { breadcrumb } from '../lib/schema';
 ---
-<Base title={`Mentions légales, ${site.brand}`} description={`Mentions légales de ${site.brand} : éditeur, coordonnées, hébergement du site et propriété intellectuelle.`}>
+<Base title={`Mentions légales de ${site.brand} : éditeur et hébergement`} description={`Éditeur : ${site.legalName}, ${site.address.street}, ${site.address.postalCode} ${site.address.city}. Hébergeur Netlify, propriété des textes du site, et adresse pour écrire à l’éditeur.`}
+  schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Mentions légales', path: '/mentions-legales/' }])]}>
   <section class="page">
     <div class="wrap prose">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Mentions légales</nav>
       <h1>Mentions légales</h1>
       <h2>Éditeur</h2>
       <p>{site.legalName}<br />{site.address.street}<br />{site.address.postalCode} {site.address.city}, Suisse</p>
@@ -13,7 +16,7 @@ import { site } from '../config/site';
       <h2>Hébergement</h2>
       <p>Netlify, Inc., 101 2nd Street, San Francisco, CA 94105, États-Unis.</p>
       <h2>Propriété intellectuelle</h2>
-      <p>Les textes et éléments graphiques de ce site appartiennent à {site.legalName}, sauf mention contraire.</p>
+      <p>Les textes et éléments graphiques de ce site appartiennent à {site.legalName}, sauf mention contraire. Les conditions de commande sont les <a href="/conditions-generales/">conditions générales</a>.</p>
     </div>
   </section>
 </Base>

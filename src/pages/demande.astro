@@ -4,8 +4,8 @@ import { site } from '../config/site';
 import { offers, payment, guarantee, formatChf } from '../config/offre';
 import { breadcrumb } from '../lib/schema';
 
-const title = 'Demander votre site internet à prix fixe';
-const description = `Formulaire de demande en une minute. Offre ${offers.map((o) => `${o.name} ${formatChf(o.price)} CHF`).join(' ou ')}. Réponse sous ${site.responseTime}, sans engagement.`;
+const title = 'Demander un site internet à prix fixe, sans engagement';
+const description = `Une minute pour indiquer votre activité et l’offre choisie. Réponse sous ${site.responseTime}. Rien n’est dû avant votre accord écrit sur le prix affiché.`;
 ---
 <Base title={title} description={description} headerCta={false}
   schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Demande', path: '/demande/' }])]}>

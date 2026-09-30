@@ -9,8 +9,8 @@ import { breadcrumb } from '../lib/schema';
 
 const [essentiel, complet] = offers;
 const updated = '2026-09-30';
-const title = 'Prix d’un site internet en Suisse (2026) : fourchettes et coûts';
-const description = `Combien coûte un site internet en Suisse romande en 2026 : fourchettes du marché, coûts annuels, et nos deux prix fixes (${formatChf(essentiel.price)} et ${formatChf(complet.price)} CHF).`;
+const title = `Prix d’un site internet en Suisse romande, dès ${formatChf(essentiel.price)} CHF`;
+const description = `Deux prix fixes pour un site vitrine en Suisse romande : ${formatChf(essentiel.price)} et ${formatChf(complet.price)} CHF. Le domaine est à votre nom et l’hébergement est offert la première année.`;
 
 const article = {
   '@context': 'https://schema.org',
@@ -30,26 +30,11 @@ const article = {
   <article class="page">
     <div class="wrap guide">
       <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Prix d’un site internet</nav>
-      <p class="kicker">Mis à jour le 30 septembre 2026</p>
+      <p class="kicker">Mis à jour le 30 septembre 2026 · <a href="/a-propos/">{site.legalName}, {site.address.city}</a></p>
       <h1>Combien coûte un site internet en Suisse en 2026 ?</h1>
 
       <div class="answer">
-        <p><strong>En bref :</strong> pour un site vitrine d’indépendant ou de PME en Suisse romande, les prix vont d’environ 500 CHF (site sur modèle) à 15 000 CHF (agence). À cela s’ajoutent environ 10 à 20 CHF par an pour un nom de domaine .ch, l’hébergement, et une maintenance facultative. Nos deux offres sont à prix fixe : <strong>{formatChf(essentiel.price)} CHF</strong> et <strong>{formatChf(complet.price)} CHF</strong>.</p>
-      </div>
-
-      <h2>Les fourchettes du marché</h2>
-      <p>Ordres de grandeur pour un site en Suisse romande. Ce sont des prix d’appel ou des fourchettes : le prix final dépend du périmètre.</p>
-      <div class="compare-wrap">
-        <table class="compare">
-          <caption>Prix hors nom de domaine.</caption>
-          <thead><tr><th scope="col">Type de site</th><th scope="col">Fourchette annoncée</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">Site sur modèle (WordPress)</th><td class="num">500 à 3 500 CHF</td></tr>
-            <tr><th scope="row">Site vitrine, fait par un indépendant</th><td class="num">1 500 à 8 000 CHF</td></tr>
-            <tr><th scope="row">Site vitrine, agence</th><td class="num">5 000 à 15 000 CHF</td></tr>
-            <tr><th scope="row">Petite boutique en ligne</th><td class="num">1 500 à 8 000 CHF</td></tr>
-          </tbody>
-        </table>
+        <p><strong>En bref :</strong> chez nous, un site vitrine coûte <strong>{formatChf(essentiel.price)} CHF</strong> ou <strong>{formatChf(complet.price)} CHF</strong>, prix fixe. Le nom de domaine .ch, environ 10 à 20 CHF par an, est enregistré à votre nom. L’hébergement est offert la première année.</p>
       </div>
 
       <h2>Ce qui fait varier le prix</h2>
@@ -57,7 +42,7 @@ const article = {
       <p>Réservation, paiement, espace client, plusieurs langues : chaque fonction ajoute du développement et des tests. Et des corrections « illimitées » se paient, dans le prix ou dans les délais.</p>
 
       <h2>Ce que vous payez après la mise en ligne</h2>
-      <p>Un .ch coûte environ 10 à 20 CHF par an, à enregistrer à votre nom. L’hébergement tourne autour de 60 à 200 CHF par an, selon l’hébergeur et le type de site. La maintenance, facultative, se situe souvent entre 80 et 250 CHF par mois. Chez nous, l’hébergement est offert la 1re année. Ensuite, {care.price} CHF par mois si vous gardez l’abonnement, ou un hébergement à votre nom.</p>
+      <p>Un .ch coûte environ 10 à 20 CHF par an, à enregistrer à votre nom. Chez nous, l’hébergement est offert la 1re année. Ensuite, {care.price} CHF par mois si vous gardez l’abonnement, ou un hébergement à votre nom.</p>
 
       <h2>Comparer deux offres sans se faire avoir</h2>
       <ol>

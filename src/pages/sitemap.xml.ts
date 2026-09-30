@@ -8,8 +8,10 @@ const pages = [
   { path: '/', lastmod: '2026-09-30' },
   { path: '/demande/', lastmod: '2026-09-30' },
   { path: '/prix-site-internet-suisse/', lastmod: '2026-09-30' },
-  { path: '/mentions-legales/', lastmod: '2026-09-29' },
-  { path: '/confidentialite/', lastmod: '2026-09-29' },
+  { path: '/a-propos/', lastmod: '2026-09-30' },
+  { path: '/conditions-generales/', lastmod: '2026-09-30' },
+  { path: '/mentions-legales/', lastmod: '2026-09-30' },
+  { path: '/confidentialite/', lastmod: '2026-09-30' },
 ];
 
 export const GET: APIRoute = () =>
