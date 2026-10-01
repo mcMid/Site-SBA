@@ -47,7 +47,7 @@ export const service = () => ({
     description: o.pitch,
     price: o.price,
     priceCurrency: 'CHF',
-    url: abs(`/demande/?offre=${o.id}`),
+    url: abs(`/demande-de-site-web/?offre=${o.id}`),
   })),
 });
 

@@ -6,7 +6,7 @@ import { abs } from '../config/site';
 // build apprend à Google à ignorer le champ.
 const pages = [
   { path: '/', lastmod: '2026-09-30' },
-  { path: '/demande/', lastmod: '2026-09-30' },
+  { path: '/demande-de-site-web/', lastmod: '2026-10-01' },
   { path: '/prix-site-internet-suisse/', lastmod: '2026-09-30' },
   { path: '/a-propos/', lastmod: '2026-09-30' },
   { path: '/conditions-generales/', lastmod: '2026-09-30' },

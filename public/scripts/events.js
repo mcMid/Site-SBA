@@ -8,7 +8,7 @@
   document.addEventListener('click', function (e) {
     var el = e.target.closest && e.target.closest('[data-event]');
     if (el) send(el.getAttribute('data-event'));
-    var a = e.target.closest && e.target.closest('a[href^="/demande/"]');
+    var a = e.target.closest && e.target.closest('a[href^="/demande-de-site-web/"]');
     if (a) send('CTA demande', { depuis: location.pathname, texte: a.textContent.trim().slice(0, 40) });
   });
   document.addEventListener('submit', function (e) {

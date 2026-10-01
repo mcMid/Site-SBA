@@ -18,7 +18,7 @@ ${offers.map((o) => `- ${o.name} : ${formatChf(o.price)} CHF, en ligne en ${o.de
 
 ## Pages
 - [Offres, tableau de ce qui est inclus, étapes, FAQ](${abs('/')})
-- [Formulaire de demande](${abs('/demande/')})
+- [Demande de site web](${abs('/demande-de-site-web/')})
 - [Guide : prix d’un site internet en Suisse en 2026](${abs('/prix-site-internet-suisse/')})
 - [Qui fait le site](${abs('/a-propos/')})
 - [Conditions générales](${abs('/conditions-generales/')})

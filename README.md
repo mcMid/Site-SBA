@@ -32,7 +32,7 @@ node scripts/cards.mjs && node scripts/hero-media.mjs && node scripts/og.mjs
 |---|---|---|
 | `/` | site internet prix fixe Suisse romande | Commerciale |
 | `/prix-site-internet-suisse/` | prix d’un site internet en Suisse | Informationnelle |
-| `/demande/` | demander un site à prix fixe | Transactionnelle |
+| `/demande-de-site-web/` | demander un site à prix fixe | Transactionnelle |
 | `/a-propos/` | SBA system Morges | Navigationnelle |
 
 ## Avant la mise en ligne

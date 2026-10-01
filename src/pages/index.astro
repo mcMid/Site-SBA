@@ -29,7 +29,7 @@ const description = `Votre site web, sur mesure. Essentiel ${formatChf(essentiel
     <p slot="top" class="kicker xh-kicker">Un site professionnel, en Suisse romande</p>
     <div slot="bottom" class="xh-offers">
       {offers.map((o) => (
-        <a href={`/demande/?offre=${o.id}`}>{o.name} <strong class="num">{formatChf(o.price)} CHF</strong></a>
+        <a href={`/demande-de-site-web/?offre=${o.id}`}>{o.name} <strong class="num">{formatChf(o.price)} CHF</strong></a>
       ))}
     </div>
   </ScrollExpandHero>
@@ -41,7 +41,7 @@ const description = `Votre site web, sur mesure. Essentiel ${formatChf(essentiel
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#offres">Voir les offres</a>
-        <a class="text-link" href="/demande/">Parler de mon projet</a>
+        <a class="text-link" href="/demande-de-site-web/">Parler de mon projet</a>
       </div>
       {reviews.count > 0 && (
         <a class="rating" href={reviews.url} rel="noopener" target="_blank">
@@ -81,7 +81,7 @@ const description = `Votre site web, sur mesure. Essentiel ${formatChf(essentiel
               <dt>À la commande</dt><dd class="num">{formatChf(o.price * payment.deposit / 100)} CHF</dd>
               <dt>À la mise en ligne</dt><dd class="num">{formatChf(o.price * (100 - payment.deposit) / 100)} CHF</dd>
             </dl>
-            <a class:list={['btn', i === 1 ? 'btn-primary' : 'btn-ghost']} href={`/demande/?offre=${o.id}`}>
+            <a class:list={['btn', i === 1 ? 'btn-primary' : 'btn-ghost']} href={`/demande-de-site-web/?offre=${o.id}`}>
               Choisir {o.id === 'essentiel' ? 'l’Essentiel' : 'le Complet'}
             </a>
           </article>
@@ -250,7 +250,7 @@ const description = `Votre site web, sur mesure. Essentiel ${formatChf(essentiel
           <p>Une minute pour faire la demande. Aucun paiement à cette étape.</p>
         </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="/demande/">Parler de mon projet</a>
+          <a class="btn btn-primary" href="/demande-de-site-web/">Parler de mon projet</a>
           {site.whatsapp
             ? <a class="btn btn-ghost" href={`https://wa.me/${site.whatsapp}`} rel="noopener" target="_blank" data-event="WhatsApp">Écrire sur WhatsApp</a>
             : <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>}

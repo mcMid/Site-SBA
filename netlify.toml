@@ -27,6 +27,19 @@
 
 # Plausible servi depuis notre domaine : la CSP reste en 'self', et les
 # bloqueurs de publicité ne faussent pas les chiffres.
+# Ancienne URL du formulaire, conservée pour les liens déjà indexés.
+[[redirects]]
+  from = "/demande/"
+  to = "/demande-de-site-web/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/demande"
+  to = "/demande-de-site-web/"
+  status = 301
+  force = true
+
 # Une seule adresse canonique. Le domaine www doit aussi être branché sur le site Netlify.
 [[redirects]]
   from = "https://www.sbasystem.ch/*"

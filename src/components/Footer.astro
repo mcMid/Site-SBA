@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
     <div>
       <h2>Offres</h2>
       <ul>
-        {offers.map((o) => <li><a href={`/demande/?offre=${o.id}`}>{o.name}, {formatChf(o.price)} CHF</a></li>)}
+        {offers.map((o) => <li><a href={`/demande-de-site-web/?offre=${o.id}`}>{o.name}, {formatChf(o.price)} CHF</a></li>)}
       </ul>
     </div>
     <div>
