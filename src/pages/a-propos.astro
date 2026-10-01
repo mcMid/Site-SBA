@@ -4,8 +4,8 @@ import { site } from '../config/site';
 import { compare, offers, formatChf } from '../config/offre';
 import { breadcrumb } from '../lib/schema';
 
-const title = 'Qui réalise votre site internet, SBA system à Morges';
-const description = 'SBA System Sàrl, à Morges, conçoit chaque site elle-même. Deux offres à prix fixe, ce qui est compris, ce qui ne l’est pas, et comment nous joindre.';
+const title = 'SBA System à Morges, un interlocuteur unique';
+const description = 'Vous échangez directement avec la personne qui construit votre site. SBA System Sàrl est à Morges. Deux prix fixes, écrits avant la commande.';
 const refused = compare.filter((row) => row.essentiel === false && row.complet === false);
 ---
 <Base title={title} description={description}
@@ -13,8 +13,8 @@ const refused = compare.filter((row) => row.essentiel === false && row.complet =
   <section class="page">
     <div class="wrap prose">
       <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › À propos</nav>
-      <h1>Une personne, à Morges, fait le site.</h1>
-      <p class="lede" style="margin-top:1.25rem">La demande arrive chez {site.legalName}. La personne qui répond conçoit le site et le met en ligne. Pas d’équipe à qui passer le dossier.</p>
+      <h1>Un interlocuteur unique, basé à Morges.</h1>
+      <p class="lede" style="margin-top:1.25rem">Vous échangez directement avec la personne qui construit votre site. Votre demande arrive chez {site.legalName}. Le dossier ne change pas de mains.</p>
       <h2>Où écrire</h2>
       <p>
         {site.legalName}<br />
@@ -23,13 +23,13 @@ const refused = compare.filter((row) => row.essentiel === false && row.complet =
         <a href={`mailto:${site.email}`}>{site.email}</a>
       </p>
       {site.ide && <p>IDE : {site.ide}</p>}
-      <h2>Ce qu’on fait</h2>
-      <p>Deux offres, {offers.map((o) => `${o.name} ${formatChf(o.price)} CHF`).join(' et ')}. Le tableau de l’accueil dit, ligne par ligne, ce qui est compris. Le prix écrit est le prix facturé.</p>
+      <h2>Ce que vous achetez</h2>
+      <p>Deux offres à prix fixe, {offers.map((o) => `${o.name} ${formatChf(o.price)} CHF`).join(' et ')}. Le prix écrit est le prix facturé. Le <a href="/#inclus">tableau de l’accueil</a> dit, ligne par ligne, ce qui est dans le prix et ce qui ne l’est pas.</p>
       <h2>Ce qu’on ne fait pas</h2>
       <ul>
         {refused.map((row) => <li>{row.label}</li>)}
       </ul>
-      <p>Les échanges se font en français, par e-mail, depuis la Suisse romande.</p>
+      <p>Ces prestations ne font pas partie des offres. Le périmètre s’arrête à ce qui est écrit. Les échanges se font en français, par e-mail, depuis Morges.</p>
       <p><a href="/conditions-generales/">Conditions générales</a> · <a href="/mentions-legales/">Mentions légales</a></p>
     </div>
   </section>

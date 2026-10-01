@@ -37,7 +37,7 @@ export const website = () => ({
 export const service = () => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'Création de site internet à prix fixe',
+  name: 'Création de site internet à prix fixe, en Suisse romande',
   serviceType: 'Création de site internet',
   provider: { '@id': orgId },
   areaServed: site.areaServed.map((name) => ({ '@type': 'AdministrativeArea', name })),

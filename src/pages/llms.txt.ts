@@ -5,7 +5,7 @@ import { offers, payment, care, guarantee, formatChf } from '../config/offre';
 export const GET: APIRoute = () => {
   const body = `# ${site.brand}
 
-> Création de sites internet à prix fixe pour indépendants et PME de Suisse romande.
+> Sites internet à prix fixe pour les entreprises de Suisse romande. Essentiel ${formatChf(offers[0].price)} CHF, Complet ${formatChf(offers[1].price)} CHF. Le prix est connu avant de commencer.
 
 ## Offres
 ${offers.map((o) => `- ${o.name} : ${formatChf(o.price)} CHF, en ligne en ${o.delayDays} jours ouvrés. ${o.pitch}`).join('\n')}

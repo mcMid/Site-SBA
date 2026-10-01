@@ -9,9 +9,9 @@ const brand = readFileSync(new URL('../src/config/site.ts', import.meta.url), 'u
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <rect width="1200" height="630" fill="#07090f"/>
-  <text x="80" y="120" font-family="Helvetica, Arial" font-size="22" font-weight="700" letter-spacing="4" fill="#9bb0c4">INDÉPENDANTS ET PME, SUISSE ROMANDE</text>
-  <text x="80" y="245" font-family="Helvetica Neue, Arial" font-weight="700" letter-spacing="-3" font-size="92" fill="#e8f4f8">Votre site internet,</text>
-  <text x="80" y="345" font-family="Helvetica Neue, Arial" font-weight="700" letter-spacing="-3" font-size="92" fill="#5cefff">à prix fixe.</text>
+  <text x="80" y="120" font-family="Helvetica, Arial" font-size="22" font-weight="700" letter-spacing="4" fill="#9bb0c4">PRIX FIXE, SUISSE ROMANDE</text>
+  <text x="80" y="245" font-family="Helvetica Neue, Arial" font-weight="700" letter-spacing="-3" font-size="78" fill="#e8f4f8">Votre site web,</text>
+  <text x="80" y="345" font-family="Helvetica Neue, Arial" font-weight="700" letter-spacing="-3" font-size="92" fill="#5cefff">sur mesure.</text>
   <line x1="80" y1="420" x2="1120" y2="420" stroke="#1e2c3d" stroke-width="2"/>
   <text x="80" y="520" font-family="Helvetica Neue, Arial" font-weight="700" font-size="84" fill="#e8f4f8">${prices[0]} <tspan font-family="Helvetica, Arial" font-size="30" font-weight="700" fill="#9bb0c4">CHF</tspan></text>
   <text x="470" y="520" font-family="Helvetica Neue, Arial" font-weight="700" font-size="84" fill="#e8f4f8">${prices[1]} <tspan font-family="Helvetica, Arial" font-size="30" font-weight="700" fill="#9bb0c4">CHF</tspan></text>

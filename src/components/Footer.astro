@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div>
       <p class="logo" style="margin-bottom:.75rem"><Logo /></p>
-      <p>Sites internet à prix fixe pour indépendants et PME de Suisse romande.</p>
+      <p>Sites internet à prix fixe pour les entreprises de Suisse romande. {formatChf(offers[0].price)} ou {formatChf(offers[1].price)} CHF. Le prix est connu avant de commencer.</p>
       <p class="muted">
         <a href={`mailto:${site.email}`}>{site.email}</a>
         {site.phone && <><br /><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></>}

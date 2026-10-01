@@ -3,7 +3,7 @@
  * Masqué tant que site.whatsapp est vide. Message prérempli pour que le
  * visiteur n'ait rien à écrire. */
 import { site } from '../config/site';
-const text = encodeURIComponent('Bonjour, j’aimerais un site internet. Pouvez-vous me renseigner ?');
+const text = encodeURIComponent('Bonjour, je souhaite un site internet à prix fixe. Voici mon activité : ');
 ---
 {site.whatsapp && (
   <a class="wa-float" href={`https://wa.me/${site.whatsapp}?text=${text}`} rel="noopener" target="_blank" data-event="WhatsApp">

@@ -5,7 +5,7 @@ import { offers, payment, care, guarantee, formatChf } from '../config/offre';
 import { breadcrumb } from '../lib/schema';
 
 const title = 'Conditions générales de SBA system pour un site à prix fixe';
-const description = 'Commande, acompte, délai, corrections, remboursement de la maquette, domaine, hébergement et abonnement. Les prix affichés sur le site sont les prix facturés.';
+const description = 'Commande, acompte, délai, corrections, remboursement, domaine et hébergement. Le prix affiché sur le site est le prix facturé.';
 ---
 <Base title={title} description={description}
   schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Conditions générales', path: '/conditions-generales/' }])]}>
@@ -13,16 +13,16 @@ const description = 'Commande, acompte, délai, corrections, remboursement de la
     <div class="wrap prose">
       <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Conditions générales</nav>
       <h1>Conditions générales</h1>
-      <p class="lede" style="margin-top:1.25rem">Ces conditions reprennent l’offre publiée sur ce site. La confirmation écrite envoyée avant l’acompte fige le prix et le périmètre.</p>
+      <p class="lede" style="margin-top:1.25rem">Le prix affiché est le prix facturé. Ces conditions fixent la commande, le délai, et ce qui se passe si la maquette ne vous convient pas. La confirmation écrite, envoyée avant l’acompte, fige le prix et le périmètre.</p>
 
       <h2>Qui</h2>
       <p>{site.legalName}, {site.address.street}, {site.address.postalCode} {site.address.city}, Suisse. Contact : <a href={`mailto:${site.email}`}>{site.email}</a>.{site.ide && ` IDE : ${site.ide}.`}</p>
 
       <h2>L’offre</h2>
-      <p>Deux formules à prix fixe : {offers.map((o) => `${o.name}, ${formatChf(o.price)} CHF, ${o.delayDays} jours ouvrés, ${o.revisionRounds} tour${o.revisionRounds > 1 ? 's' : ''} de corrections`).join(' ; ')}. Le détail de chaque ligne est le tableau de la page d’accueil. Une ligne marquée non n’est pas comprise.</p>
+      <p>Deux offres à prix fixe : {offers.map((o) => `${o.name}, ${formatChf(o.price)} CHF, ${o.delayDays} jours ouvrés, ${o.revisionRounds} tour${o.revisionRounds > 1 ? 's' : ''} de corrections`).join(' ; ')}. Le détail de chaque ligne est le tableau de la page d’accueil. Une ligne marquée non n’est pas comprise.</p>
 
       <h2>Commande et paiement</h2>
-      <p>La demande en ligne n’engage pas. Après le formulaire de projet, une confirmation écrite reprend le prix affiché. L’acompte de {payment.deposit} % est dû quand cette confirmation est acceptée. Le solde de {100 - payment.deposit} % est dû à la mise en ligne, sur le nom de domaine, après les corrections comprises. Paiement par {site.paymentMethods.join(', ').replace(/, ([^,]*)$/, ' ou $1')}. Aucun prélèvement automatique.</p>
+      <p>La demande en ligne n’engage pas. Après le formulaire de projet, une confirmation écrite reprend le prix affiché. L’acompte de {payment.deposit} % est dû quand vous acceptez cette confirmation. Le solde de {100 - payment.deposit} % est dû à la mise en ligne, sur votre nom de domaine, après les corrections comprises. Paiement par {site.paymentMethods.join(', ').replace(/, ([^,]*)$/, ' ou $1')}. Aucun prélèvement.</p>
 
       <h2>Délai</h2>
       <p>Le délai court le jour où les contenus demandés sont complets. Il est de {offers.map((o) => `${o.delayDays} jours ouvrés pour l’offre ${o.name}`).join(', ')}.</p>

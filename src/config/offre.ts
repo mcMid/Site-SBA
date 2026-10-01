@@ -24,13 +24,13 @@ export const offers: Offer[] = [
     price: 990,
     delayDays: 10,
     revisionRounds: 1,
-    forWho: 'Indépendants, artisans, thérapeutes, consultants',
-    pitch: 'Un site court et clair : qui vous êtes, ce que vous faites, comment vous joindre.',
+    forWho: 'Pour les indépendants, artisans, consultants et petites activités qui ont besoin d’un site simple et professionnel.',
+    pitch: 'Trois pages pour que l’on comprenne qui vous êtes, ce que vous faites et comment vous écrire. Vos textes, vos couleurs, un formulaire qui arrive dans votre boîte.',
     highlights: [
-      'Jusqu’à 3 pages',
-      'Vos textes mis en page',
-      'Formulaire de contact',
-      'Hébergement offert la 1re année',
+      'Jusqu’à 3 pages, aux couleurs de votre activité',
+      'Vos textes mis en page, tels que vous les avez écrits',
+      'Un formulaire simple, reçu directement dans votre boîte',
+      'Hébergement offert la première année',
     ],
   },
   {
@@ -39,14 +39,14 @@ export const offers: Offer[] = [
     price: 1790,
     delayDays: 15,
     revisionRounds: 3,
-    forWho: 'PME, commerces, cabinets, entreprises de services',
-    pitch: 'Plusieurs pages pour présenter chaque service et être trouvé sur Google dans votre région.',
+    forWho: 'Pour les PME, commerces, cabinets et entreprises de services qui veulent présenter plusieurs activités et être trouvés localement.',
+    pitch: 'Une page par activité, des textes rédigés à partir de vos réponses, et une fiche Google prête. Le site présente l’entreprise pendant que vous travaillez.',
     highlights: [
-      'Jusqu’à 6 pages',
-      '3 tours de corrections',
-      'Textes rédigés par nous à partir du formulaire de projet',
-      'Fiche Google Business Profile configurée',
-      'Une page par service pour le référencement local',
+      'Jusqu’à 6 pages, une par activité',
+      'Des textes rédigés à partir de vos réponses',
+      'Une fiche Google configurée pour votre zone',
+      '3 tours de corrections, remarques regroupées',
+      'Hébergement offert la première année',
     ],
   },
 ];
@@ -62,18 +62,18 @@ export interface CompareRow {
 
 // Ce qui sépare les deux offres. Validé le 29.09.2026 (garantie et hébergement 1re année compris).
 export const compare: CompareRow[] = [
-  { label: 'Design à vos couleurs et à votre logo', essentiel: true, complet: true },
+  { label: 'Design à vos couleurs, avec votre logo', essentiel: true, complet: true },
   { label: 'Nombre de pages', essentiel: 'jusqu’à 3', complet: 'jusqu’à 6' },
-  { label: 'Adapté au mobile', essentiel: true, complet: true },
-  { label: 'Formulaire de contact', essentiel: true, complet: true },
-  { label: 'Référencement de base (titres, descriptions, vitesse)', essentiel: true, complet: true },
-  { label: 'Rédaction des textes', essentiel: false, complet: true },
-  { label: 'Fiche Google Business Profile', essentiel: false, complet: true },
-  { label: 'Une page par service', essentiel: false, complet: true },
+  { label: 'Lisible sur téléphone, tablette et ordinateur', essentiel: true, complet: true },
+  { label: 'Formulaire de contact, reçu dans votre boîte', essentiel: true, complet: true },
+  { label: 'Base pour Google : titres, descriptions, vitesse', essentiel: true, complet: true },
+  { label: 'Rédaction des textes à partir de vos réponses', essentiel: false, complet: true },
+  { label: 'Fiche Google Business Profile configurée', essentiel: false, complet: true },
+  { label: 'Une page par activité', essentiel: false, complet: true },
   { label: 'Mise en ligne et nom de domaine relié', essentiel: true, complet: true },
   { label: 'Tours de corrections', essentiel: '1 tour', complet: '3 tours' },
-  { label: 'Garantie : acompte remboursé si la maquette ne vous convient pas', essentiel: true, complet: true },
-  { label: 'Hébergement et HTTPS la 1re année', essentiel: true, complet: true },
+  { label: 'Acompte remboursé si la maquette ne vous convient pas', essentiel: true, complet: true },
+  { label: 'Hébergement et HTTPS offerts la 1re année', essentiel: true, complet: true },
   { label: 'Boutique en ligne', essentiel: false, complet: false },
   { label: 'Site en plusieurs langues', essentiel: false, complet: false },
   { label: 'Séance photo', essentiel: false, complet: false },
@@ -87,22 +87,22 @@ export const payment = {
 
 /** Garantie : renverse le risque du premier paiement. */
 export const guarantee = {
-  short: 'Après les corrections comprises, si la maquette ne vous convient pas : on arrête, acompte remboursé.',
-  long: 'Si la maquette ne vous convient pas après les corrections comprises dans votre offre, vous nous le dites : on arrête là et on vous rembourse l’acompte en entier. Vous ne payez que pour un site que vous voulez mettre en ligne.',
+  short: 'Si la maquette ne convient pas après les corrections comprises, le projet s’arrête et l’acompte est remboursé.',
+  long: 'Vous découvrez le site sur une adresse privée avant de payer le solde. Après les corrections comprises dans votre offre, si la maquette ne vous convient toujours pas, le projet s’arrête et l’acompte vous est remboursé en entier. Le solde n’est dû que pour un site que vous mettez en ligne.',
 };
 
 export const care = {
   price: 29, // CHF / mois
   optional: true,
-  freeFirstYear: 'L’hébergement est offert la 1re année. Ensuite, deux choix :',
+  freeFirstYear: 'La première année, l’hébergement est offert. Dès la deuxième, nous pouvons nous en occuper, si vous le souhaitez.',
   includes: [
-    'Hébergement et certificat HTTPS (dès la 2e année)',
+    'Hébergement et certificat HTTPS, dès la 2e année',
     'Mises à jour et sauvegardes',
-    'Surveillance : on est prévenus avant vous si le site tombe',
-    'Une petite modification de texte ou d’horaires par mois',
+    'Surveillance : nous sommes prévenus si le site tombe',
+    'Une modification de texte ou d’horaires par mois',
   ],
   without:
-    'Sans abonnement, le site est hébergé à votre nom et on vous remet tous les accès. Il vous appartient dans les deux cas.',
+    'Le nom de domaine est enregistré à votre nom. À la mise en ligne, vous recevez les accès. Vous pouvez nous confier la maintenance, ou gérer l’hébergement vous-même. Dans les deux cas, le site vous appartient.',
   cancel: 'Résiliable chaque mois, sans frais.',
 };
 
@@ -115,74 +115,31 @@ export interface Step {
 
 export const steps: Step[] = [
   {
-    title: 'Vous faites une demande',
-    text: 'Une minute de formulaire. On vous répond sous 24 h ouvrées.',
+    title: 'Vous expliquez votre projet',
+    text: 'Une minute pour dire ce que vous faites. Nous répondons sous 24 h ouvrées, avec la formule adaptée. Rien n’est dû à cette étape.',
     who: 'vous',
   },
   {
-    title: 'Formulaire de projet',
-    text: 'On vous envoie par e-mail un formulaire de 10 minutes : vos pages, vos services, votre date souhaitée. Vous recevez ensuite une confirmation écrite au prix affiché. L’acompte est dû quand vous l’acceptez.',
+    title: 'Vous donnez l’essentiel',
+    text: 'Confirmation écrite au prix affiché : l’acompte n’est dû qu’à votre accord. Vous envoyez ensuite logo, photos et textes. Le délai démarre quand le dossier est complet.',
     who: 'vous',
     money: `Acompte ${payment.deposit} %`,
   },
   {
-    title: 'Vous envoyez vos contenus',
-    text: 'Logo, photos et textes (pour l’offre Complet, on les rédige à partir de votre formulaire de projet). Une liste précise vous dit quoi envoyer. Le délai démarre à ce moment.',
+    title: 'Nous construisons le site',
+    text: 'Nous mettons en page ce que vous faites, pour qui, et comment vous joindre. Sur le Complet, les textes sont rédigés à partir de vos réponses.',
+    who: 'nous',
+  },
+  {
+    title: 'Vous découvrez la maquette',
+    text: 'Le site est en ligne sur une adresse privée, avant le solde. Un tour de corrections sur l’Essentiel, trois sur le Complet. Si la maquette ne convient toujours pas, l’acompte est rendu.',
     who: 'vous',
   },
   {
-    title: 'Vous validez la maquette',
-    text: 'Le site vous est présenté en ligne sur une adresse privée. Vous regroupez vos remarques : un tour pour l’offre Essentiel, trois pour l’offre Complet. Après ces tours, si la maquette ne vous convient pas : acompte remboursé.',
-    who: 'vous',
-  },
-  {
-    title: 'Mise en ligne',
-    text: 'Le site passe sur votre nom de domaine. Vous recevez les accès et un mode d’emploi d’une page.',
+    title: 'Votre site est en ligne',
+    text: 'Mise en ligne sur votre nom de domaine. Vous recevez les accès et un mode d’emploi. Le solde n’est demandé qu’à ce moment.',
     who: 'nous',
     money: `Solde ${100 - payment.deposit} %`,
-  },
-];
-
-export const faq: { q: string; a: string }[] = [
-  {
-    q: 'Et si le site ne me plaît pas ?',
-    a: 'Vous voyez la maquette en ligne avant de payer le solde. Si elle ne vous convient pas après les corrections comprises dans votre offre, on arrête et on vous rembourse l’acompte en entier.',
-  },
-  {
-    q: 'Pourquoi un prix fixe, et pas un devis ?',
-    a: 'Parce que le périmètre est fixe. Deux offres, un contenu défini, un nombre de tours de corrections écrit d’avance : on sait ce que ça coûte à produire, vous savez ce que vous payez.',
-  },
-  {
-    q: 'Que comprend un tour de corrections ?',
-    a: 'Vous regroupez toutes vos remarques sur la maquette, on les applique en une fois. L’offre Essentiel comprend un tour, l’offre Complet en comprend trois. Changer un texte, une photo, une couleur, l’ordre des sections : c’est compris. Refaire le site dans une autre direction ne l’est pas.',
-  },
-  {
-    q: 'Et si j’ai besoin de plus de corrections ?',
-    a: 'On vous annonce le prix avant de toucher à quoi que ce soit. Rien n’est facturé sans votre accord écrit.',
-  },
-  {
-    q: 'Le site m’appartient-il ?',
-    a: 'Oui, avec ou sans abonnement. Le nom de domaine est enregistré à votre nom et vous recevez tous les accès à la mise en ligne.',
-  },
-  {
-    q: 'Le nom de domaine est-il compris ?',
-    a: 'On le relie et on le configure. L’enregistrement lui-même (environ 10 à 20 CHF par an pour un .ch) se fait à votre nom, chez le registraire de votre choix.',
-  },
-  {
-    q: 'Comment payer ?',
-    a: 'Par virement, facture QR ou TWINT. La moitié à la commande, le solde à la mise en ligne. Pas de carte de crédit demandée, pas de prélèvement automatique.',
-  },
-  {
-    q: 'Qu’est-ce que je paie après la mise en ligne ?',
-    a: 'Rien la première année : l’hébergement est offert. Ensuite, soit l’abonnement facultatif à 29 CHF par mois (hébergement, mises à jour, une modification par mois), soit un hébergement à votre nom, que l’on vous configure. Le nom de domaine (10 à 20 CHF par an pour un .ch) reste à votre charge dans les deux cas.',
-  },
-  {
-    q: 'Quand le délai commence-t-il ?',
-    a: `Le jour où l’on a reçu vos contenus complets : ${offers[0].delayDays} jours ouvrés pour l’Essentiel, ${offers[1].delayDays} pour le Complet. Le formulaire et l’envoi des contenus viennent avant ce décompte.`,
-  },
-  {
-    q: 'Travaillez-vous hors de Suisse romande ?',
-    a: 'Les échanges se font en français, par e-mail. On travaille depuis la Suisse romande. Votre entreprise peut être ailleurs, si ce cadre vous convient.',
   },
 ];
 
@@ -190,3 +147,38 @@ const chf = new Intl.NumberFormat('fr-CH', { maximumFractionDigits: 0 });
 /** 1190 → « 1 190 » avec espace insécable (certaines polices n'ont pas de glyphe pour l'espace fine U+202F). */
 export const formatChf = (n: number) => chf.format(n).replace(/[\s\u2019']/g, '\u00a0');
 export const minPrice = Math.min(...offers.map((o) => o.price));
+
+export const faq: { q: string; a: string }[] = [
+  {
+    q: 'Combien coûte réellement un site ?',
+    a: `Deux prix fixes : ${formatChf(offers[0].price)} CHF pour l’Essentiel, ${formatChf(offers[1].price)} CHF pour le Complet. Le montant est connu avant de commander. Le .ch, environ 10 à 20 CHF par an, est enregistré à votre nom et reste à votre charge. Rien n’est ajouté sur la facture sans un prix annoncé avant.`,
+  },
+  {
+    q: 'Combien de temps faut-il ?',
+    a: `${offers[0].delayDays} jours ouvrés pour l’Essentiel, ${offers[1].delayDays} pour le Complet. Le décompte démarre le jour où vos contenus sont complets, pas le jour du premier message.`,
+  },
+  {
+    q: 'Dois-je payer la totalité au début ?',
+    a: `Non. ${payment.deposit} % à la commande, une fois la confirmation écrite acceptée, et ${100 - payment.deposit} % à la mise en ligne. Virement, facture QR ou TWINT. Aucune carte enregistrée, aucun prélèvement.`,
+  },
+  {
+    q: 'Et si je n’aime pas le résultat ?',
+    a: `Vous voyez la maquette sur une adresse privée, avant le solde. ${offers[0].name} : ${offers[0].revisionRounds} tour de corrections. ${offers[1].name} : ${offers[1].revisionRounds} tours. Textes, photos, couleurs, ordre des sections : compris. Un autre design : non. Après ces corrections, si la maquette ne convient toujours pas, le projet s’arrête et l’acompte est remboursé en entier. Un tour en plus est chiffré avant d’être fait.`,
+  },
+  {
+    q: 'Le site m’appartient-il ?',
+    a: 'Oui. Le nom de domaine est à votre nom, et vous recevez les accès à la mise en ligne. Avec ou sans maintenance.',
+  },
+  {
+    q: 'Que se passe-t-il après la première année ?',
+    a: `L’hébergement est offert la première année. Ensuite, soit ${care.price} CHF par mois (hébergement, mises à jour, sauvegardes, surveillance, une modification de texte ou d’horaires par mois), soit un hébergement à votre nom. ${care.cancel} Le .ch, 10 à 20 CHF par an, reste à votre charge.`,
+  },
+  {
+    q: 'Puis-je gérer le site moi-même ?',
+    a: 'Oui. Sans maintenance, le site est hébergé à votre nom et tous les accès vous sont remis. Vous pouvez aussi nous confier la maintenance, et arrêter quand vous voulez.',
+  },
+  {
+    q: 'Travaillez-vous avec les entreprises de Suisse romande ?',
+    a: 'Oui. Les échanges se font en français, par e-mail, depuis Morges. Votre entreprise peut être ailleurs, si ce cadre vous convient.',
+  },
+];

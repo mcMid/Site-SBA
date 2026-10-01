@@ -31,7 +31,7 @@ export const site = {
 /** La personne qui fait les sites. Un visage vend mieux qu'une marque. */
 export const founder = {
   name: '', // ex. « Mathieu »
-  role: 'Je conçois et mets en ligne chaque site moi-même.',
+  role: 'Vous échangez directement avec la personne qui construit votre site.',
   city: '', // ex. « Lausanne »
   photo: '', // ex. '/fondateur.webp' (carré, 400×400, déposé dans public/)
   bio: '', // 2 phrases : parcours, pourquoi ce métier

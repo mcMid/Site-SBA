@@ -15,12 +15,11 @@ interface Props {
   ctaHref?: string;
   ctaLabel?: string;
   /** Texte de vente sur la plaque, visible seulement une fois ouverte. */
-  pitchKicker?: string;
   pitchTitle?: string;
+  pitchDelay?: string;
   pitchPrice?: string;
-  pitchNote?: string;
 }
-const { mediaSrc, mediaWidth, mediaHeight, bgSrc, titleLeft, titleRight, ctaHref, ctaLabel, pitchKicker, pitchTitle, pitchPrice, pitchNote } = Astro.props;
+const { mediaSrc, mediaWidth, mediaHeight, bgSrc, titleLeft, titleRight, ctaHref, ctaLabel, pitchTitle, pitchDelay, pitchPrice } = Astro.props;
 ---
 <section class="xh" data-expand-hero aria-labelledby="xh-title">
   <div class="xh-bg" aria-hidden="true">
@@ -32,10 +31,9 @@ const { mediaSrc, mediaWidth, mediaHeight, bgSrc, titleLeft, titleRight, ctaHref
       <img src={mediaSrc} alt="" width={mediaWidth} height={mediaHeight} fetchpriority="high" decoding="async" />
       {pitchTitle && (
         <div class="xh-pitch" aria-hidden="true">
-          {pitchKicker && <p class="k">{pitchKicker}</p>}
           <p class="t">{pitchTitle}</p>
+          {pitchDelay && <p class="d">{pitchDelay}</p>}
           {pitchPrice && <p class="p">{pitchPrice}</p>}
-          {pitchNote && <p class="n">{pitchNote}</p>}
         </div>
       )}
       {ctaHref && ctaLabel && <a class="xh-cta" href={ctaHref}>{ctaLabel}</a>}

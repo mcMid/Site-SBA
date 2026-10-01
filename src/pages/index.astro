@@ -10,8 +10,8 @@ import { offers, compare, payment, care, guarantee, steps, faq, formatChf, minPr
 import { organization, website, service, faqPage } from '../lib/schema';
 
 const [essentiel, complet] = offers;
-const title = `Site à prix fixe pour PME, Suisse romande, dès ${formatChf(minPrice)} CHF`;
-const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatChf(complet.price)} CHF, pour indépendants et PME en Suisse romande. ${payment.deposit} % à la commande, le solde à la mise en ligne. Délai : ${essentiel.delayDays} à ${complet.delayDays} jours ouvrés.`;
+const title = `Site internet à prix fixe dès ${formatChf(minPrice)} CHF, Suisse romande`;
+const description = `Votre site web, sur mesure. Essentiel ${formatChf(essentiel.price)} CHF, Complet ${formatChf(complet.price)} CHF. 50 % à la commande, 50 % à la mise en ligne.`;
 ---
 <Base title={title} description={description} preloadImage="/hero/site.webp?v=ecran" schemas={[organization(), website(), service(), faqPage()]}>
 
@@ -20,14 +20,13 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <ScrollExpandHero
     mediaSrc="/hero/site.webp?v=ecran" mediaWidth={1600} mediaHeight={1000}
     bgSrc="/hero/bg.webp?v=photo"
-    titleLeft="Votre site," titleRight="à prix fixe."
-    pitchKicker="Essentiel"
-    pitchTitle="Votre site"
-    pitchPrice={`${formatChf(essentiel.price)} CHF`}
-    pitchNote={`Prix fixe. En ligne en ${essentiel.delayDays} jours ouvrés.`}
-    ctaHref="/demande/?offre=essentiel" ctaLabel="Écrire pour ce prix"
+    titleLeft="Votre site web," titleRight="sur mesure."
+    pitchTitle="Essentiel ou Complet"
+    pitchDelay={`${formatChf(essentiel.price)} CHF`}
+    pitchPrice={`${formatChf(complet.price)} CHF`}
+    ctaHref="#offres" ctaLabel="Voir les offres"
   >
-    <p slot="top" class="kicker xh-kicker">Indépendants et PME, Suisse romande</p>
+    <p slot="top" class="kicker xh-kicker">Un site professionnel, en Suisse romande</p>
     <div slot="bottom" class="xh-offers">
       {offers.map((o) => (
         <a href={`/demande/?offre=${o.id}`}>{o.name} <strong class="num">{formatChf(o.price)} CHF</strong></a>
@@ -38,10 +37,11 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <section class="intro" aria-label="En bref">
     <div class="wrap">
       <p class="hero-lede">
-        Deux offres, {formatChf(essentiel.price)} ou {formatChf(complet.price)} CHF. Le tableau plus bas dit ce qui est compris, et ce qui ne l’est pas.
+        Votre activité mérite un site qui inspire confiance. Le prix est connu dès le départ.
       </p>
       <div class="hero-actions">
-        <a class="text-link" href="#inclus">Le détail, ligne par ligne</a>
+        <a class="btn btn-primary" href="#offres">Voir les offres</a>
+        <a class="text-link" href="/demande/">Parler de mon projet</a>
       </div>
       {reviews.count > 0 && (
         <a class="rating" href={reviews.url} rel="noopener" target="_blank">
@@ -50,9 +50,9 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
         </a>
       )}
       <ul class="proofs">
-        <li>Le chiffre sur cette page est le chiffre facturé. Pas de devis, pas de « nous consulter ».</li>
+        <li>Un bon site dit ce que vous faites, pour qui, et comment vous joindre. C’est ce que nous construisons.</li>
+        <li>Prix fixe. {payment.deposit} % à la commande, {100 - payment.deposit} % à la mise en ligne. Hébergement offert 1 an. Votre site vous appartient.</li>
         <li>{guarantee.short}</li>
-        <li>Hébergement offert la 1re année. Ensuite {care.price} CHF par mois, seulement si vous le gardez. Délai : {essentiel.delayDays} à {complet.delayDays} jours ouvrés.</li>
       </ul>
     </div>
   </section>
@@ -61,7 +61,7 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <section class="section" id="offres" aria-labelledby="offres-titre">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="offres-titre">Essentiel ou Complet. Le prix est déjà écrit.</h2>
+        <h2 id="offres-titre">Deux offres. Deux prix. Rien à deviner.</h2>
       </div>
       <div class="offers">
         {offers.map((o, i) => (
@@ -82,7 +82,7 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
               <dt>À la mise en ligne</dt><dd class="num">{formatChf(o.price * (100 - payment.deposit) / 100)} CHF</dd>
             </dl>
             <a class:list={['btn', i === 1 ? 'btn-primary' : 'btn-ghost']} href={`/demande/?offre=${o.id}`}>
-              Choisir {o.name}
+              Choisir {o.id === 'essentiel' ? 'l’Essentiel' : 'le Complet'}
             </a>
           </article>
         ))}
@@ -94,12 +94,12 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <section class="section" id="inclus" aria-labelledby="inclus-titre">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="inclus-titre">Ce qui est compris, et ce qui ne l’est pas.</h2>
-        <p class="lede">Pas d’option qui apparaît sur la facture. Si une ligne dit non, elle n’est pas comprise, et on vous le dit avant de commencer. Pour comparer avec d’autres offres : <a href="/prix-site-internet-suisse/">combien coûte un site en Suisse en 2026</a>.</p>
+        <h2 id="inclus-titre">Vous n’avez pas besoin d’un devis pour connaître le prix.</h2>
+        <p class="lede">Le prix correspond à un périmètre défini : pages, rédaction, corrections, délai et livrables sont écrits noir sur blanc. Une page ou un texte en plus n’apparaît pas sur la facture sans un prix annoncé avant. Pas d’abonnement obligatoire pour garder le site. Pour situer ces montants : <a href="/prix-site-internet-suisse/">prix d’un site internet en Suisse</a>.</p>
       </div>
       <div class="compare-wrap">
         <table class="compare">
-          <caption>Délai compté en jours ouvrés, à partir de la réception de vos contenus complets.</caption>
+          <caption>Le délai, en jours ouvrés, démarre le jour où vos contenus sont complets.</caption>
           <thead>
             <tr>
               <th scope="col"><span class="sr-only">Prestation</span></th>
@@ -133,28 +133,28 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <section class="section" id="paiement" aria-labelledby="paiement-titre">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="paiement-titre">Vous payez la moitié. Le reste quand le site est en ligne.</h2>
+        <h2 id="paiement-titre">Vous payez la moitié maintenant. Le reste quand le site est en ligne.</h2>
       </div>
       <div class="split">
         <div class="panel">
-          <h3>L’acompte, puis le solde</h3>
+          <h3>Le solde, seulement une fois le site en ligne</h3>
           <div class="bar" aria-label={`${payment.deposit} % ${payment.depositWhen}, ${100 - payment.deposit} % ${payment.balanceWhen}`}>
             <div><strong>{payment.deposit} %</strong><span>{payment.depositWhen}</span></div>
             <div><strong>{100 - payment.deposit} %</strong><span>{payment.balanceWhen}</span></div>
           </div>
-          <p>Le solde n’est dû que lorsque le site est en ligne, sur votre nom de domaine, après les corrections comprises dans votre offre.</p>
-          <p class="guarantee"><Icon name="check" /><span><strong>Garantie.</strong> {guarantee.long}</span></p>
+          <p>Le solde n’est demandé qu’une fois le site terminé, corrigé et mis en ligne sur votre nom de domaine. Pas de paiement intégral avant de voir le résultat.</p>
+          <p class="guarantee"><Icon name="check" /><span><strong>Et si le site ne vous plaît pas ?</strong> {guarantee.long}</span></p>
           <p class="muted" style="margin:0">Paiement par {site.paymentMethods.join(', ').replace(/, ([^,]*)$/, ' ou $1')}.</p>
         </div>
         <div class="panel">
-          <h3>Après la mise en ligne</h3>
-          <p>{care.freeFirstYear}</p>
+          <h3>Vous préférez ne plus vous en occuper ?</h3>
+          <p>À partir de la deuxième année, nous pouvons gérer l’hébergement, les mises à jour, les sauvegardes et la surveillance pour {care.price} CHF par mois. La première année, l’hébergement est offert. {care.cancel}</p>
           <div class="care-price">
             <Price value={care.price} suffix=" / mois" />
             <span class="optional">Facultatif</span>
           </div>
           <ul>{care.includes.map((i) => <li>{i}</li>)}</ul>
-          <p class="muted" style="margin:0">{care.cancel} {care.without}</p>
+          <p class="muted" style="margin:0">{care.without}</p>
         </div>
       </div>
     </div>
@@ -164,7 +164,7 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <section class="section" id="etapes" aria-labelledby="etapes-titre">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="etapes-titre">De la demande à la mise en ligne.</h2>
+        <h2 id="etapes-titre">Cinq étapes. Vous savez toujours où vous en êtes.</h2>
       </div>
       <ol class="steps">
         {steps.map((s, i) => (
@@ -193,15 +193,15 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
       <div class="rule-box">
         <span class="big" aria-hidden="true">3</span>
         <div>
-          <h2 id="corrections-titre">Trois tours sur l’offre Complet. Un sur l’Essentiel.</h2>
-          <p class="lede" style="margin-top:1rem">Chaque tour, vous regroupez vos remarques et on les applique en une fois. Un cadre clair, pas un chantier sans fin. Et si la maquette ne vous convient toujours pas : on arrête, acompte remboursé.</p>
+          <h2 id="corrections-titre">Les corrections sont prévues. Le projet ne s’étire pas.</h2>
+          <p class="lede" style="margin-top:1rem">Un tour sur l’Essentiel, trois sur le Complet. Vous regroupez vos remarques, nous les appliquons en une fois. Si la maquette ne vous convient toujours pas, nous arrêtons et l’acompte vous est rendu.</p>
           <div class="rule-lists">
             <div>
-              <h3>Compris dans ces tours</h3>
+              <h3>Compris</h3>
               <ul>
-                <li>Modifier ou remplacer des textes</li>
-                <li>Changer des photos</li>
-                <li>Ajuster couleurs et ordre des sections</li>
+                <li>Réécrire ou remplacer un texte</li>
+                <li>Changer les photos</li>
+                <li>Ajuster les couleurs et l’ordre des sections</li>
               </ul>
             </div>
             <div>
@@ -222,7 +222,7 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <section class="section" id="questions" aria-labelledby="faq-titre">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="faq-titre">Avant de commencer</h2>
+        <h2 id="faq-titre">Les questions à poser avant de décider</h2>
       </div>
       <div class="faq">
         {faq.map(({ q, a }) => (
@@ -239,18 +239,18 @@ const description = `Deux prix fixes, ${formatChf(essentiel.price)} ou ${formatC
   <section class="section final" aria-labelledby="final-titre">
     <div class="wrap">
       <h2 class="final-head" id="final-titre">
-        <span class="final-l1">Une demande prend </span>
-        <span class="final-l2">une minute. </span>
-        <span class="final-k">On répond sous </span>
+        <span class="final-l1">Mieux qu’un site bricolé </span>
+        <span class="final-l2">entre deux rendez-vous.</span>
+        <span class="final-k">Réponse sous </span>
         <span class="final-n">{site.responseTime}</span>
       </h2>
       <div class="final-bar">
         <div class="final-terms">
-          <p>Aucun engagement tant que vous n’avez pas validé l’offre par écrit.</p>
-          <p>{guarantee.short}</p>
+          <p>Expliquez-nous simplement ce que vous faites. Nous répondons sous {site.responseTime}, avec la formule adaptée à votre projet.</p>
+          <p>Une minute pour faire la demande. Aucun paiement à cette étape.</p>
         </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="/demande/">Envoyer une demande</a>
+          <a class="btn btn-primary" href="/demande/">Parler de mon projet</a>
           {site.whatsapp
             ? <a class="btn btn-ghost" href={`https://wa.me/${site.whatsapp}`} rel="noopener" target="_blank" data-event="WhatsApp">Écrire sur WhatsApp</a>
             : <a class="text-link" href={`mailto:${site.email}`}>{site.email}</a>}

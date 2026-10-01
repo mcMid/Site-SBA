@@ -4,8 +4,8 @@ import { site } from '../config/site';
 import { offers, payment, guarantee, formatChf } from '../config/offre';
 import { breadcrumb } from '../lib/schema';
 
-const title = 'Demander un site internet à prix fixe, sans engagement';
-const description = `Une minute pour indiquer votre activité et l’offre choisie. Réponse sous ${site.responseTime}. Rien n’est dû avant votre accord écrit sur le prix affiché.`;
+const title = 'Parler de votre projet de site internet';
+const description = `Quelques informations suffisent pour comprendre votre activité. Réponse sous ${site.responseTime}, avec la formule adaptée. Aucun paiement à cette étape.`;
 ---
 <Base title={title} description={description} headerCta={false}
   schemas={[breadcrumb([{ name: 'Accueil', path: '/' }, { name: 'Demande', path: '/demande/' }])]}>
@@ -13,8 +13,8 @@ const description = `Une minute pour indiquer votre activité et l’offre chois
     <div class="wrap">
       <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> › Demande</nav>
       <div class="section-head">
-        <h1>Votre activité, et l’offre.</h1>
-        <p class="lede">Une minute. On vous répond sous {site.responseTime} avec un formulaire de projet de 10 minutes, sans rendez-vous téléphonique. Rien n’est dû avant que vous ayez validé l’offre par écrit.</p>
+        <h1>Parlez-nous de votre projet</h1>
+        <p class="lede">Quelques informations suffisent pour comprendre votre activité et vous orienter vers la bonne formule. Réponse sous {site.responseTime}. Rien n’est dû avant votre accord écrit.</p>
         <p class="aside-note">{guarantee.short}</p>
       </div>
 
@@ -23,7 +23,7 @@ const description = `Une minute pour indiquer votre activité et l’offre chois
         <p class="hp" aria-hidden="true"><label>Ne pas remplir <input name="societe_web" tabindex="-1" autocomplete="off" /></label></p>
 
         <fieldset class="field">
-          <legend>Quelle offre vous intéresse ?</legend>
+          <legend>Quelle formule vous correspond ?</legend>
           <div class="choices">
             {offers.map((o) => (
               <div class="choice">
@@ -33,7 +33,7 @@ const description = `Une minute pour indiquer votre activité et l’offre chois
             ))}
             <div class="choice">
               <input type="radio" name="offre" id="offre-hesite" value="hesite" checked />
-              <label for="offre-hesite">Je ne sais pas encore<small>On vous conseille par e-mail</small></label>
+              <label for="offre-hesite">Je ne sais pas encore<small>Nous vous orientons vers la formule adaptée</small></label>
             </div>
           </div>
         </fieldset>
@@ -55,8 +55,8 @@ const description = `Une minute pour indiquer votre activité et l’offre chois
         </div>
 
         <div class="field">
-          <label for="message">Votre activité et ce que vous attendez du site <span class="hint">(facultatif)</span></label>
-          <textarea id="message" name="message" placeholder="ex. Menuiserie à Morges, je veux être trouvé sur Google et recevoir des demandes de devis"></textarea>
+          <label for="message">Votre activité, et ce que le site doit permettre <span class="hint">(facultatif)</span></label>
+          <textarea id="message" name="message" placeholder="ex. Menuiserie à Morges. Je veux que l’on comprenne mon métier, et que l’on puisse me contacter."></textarea>
         </div>
 
         <div class="consent">
@@ -65,9 +65,9 @@ const description = `Une minute pour indiquer votre activité et l’offre chois
         </div>
 
         <div>
-          <button class="btn btn-primary" type="submit">Envoyer</button>
+          <button class="btn btn-primary" type="submit">Envoyer ma demande</button>
         </div>
-        <p class="aside-note">Pour rappel : {payment.deposit} % {payment.depositWhen}, {100 - payment.deposit} % {payment.balanceWhen}. Aucun paiement n’est demandé à cette étape.</p>
+        <p class="aside-note">Aucun paiement à cette étape. {payment.deposit} % {payment.depositWhen}, {100 - payment.deposit} % {payment.balanceWhen}, seulement après votre accord écrit.</p>
       </form>
     </div>
   </section>
